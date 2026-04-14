@@ -60,7 +60,7 @@ const MetricTile = ({ label, value, sub, portal = 'inv' }: any) => (
 
 const Card = ({ children, className = '', hover = true, portal = 'inv' }: any) => (
   <div className={`bg-[#FFFFFF] border border-[rgba(0,0,0,0.08)] rounded-2xl p-6 transition-all duration-300 ${hover ? `hover:border-[rgba(0,0,0,0.12)] hover:-translate-y-[2px]` : ''} ${className}`}
-    style={{ boxShadow: '0 1px 0 rgba(0,0,0,0.04), 0 4px 24px rgba(0,0,0,0.06)' }}>
+    style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 24px rgba(0,0,0,0.06)' }}>
     {children}
   </div>
 );
@@ -652,7 +652,7 @@ export default function ParadigmShift() {
         <div className="grid grid-cols-3 gap-5">
           {filtered.map(m => (
             <div key={m.id} className="bg-[#FFFFFF] border border-[rgba(0,0,0,0.08)] rounded-2xl overflow-hidden transition-all duration-300 hover:border-[rgba(124,92,252,0.2)] hover:-translate-y-1 cursor-pointer"
-              style={{ boxShadow: '0 1px 0 rgba(0,0,0,0.04), 0 4px 24px rgba(0,0,0,0.06)' }}
+              style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 24px rgba(0,0,0,0.06)' }}
               onClick={() => { setSelectedMarket(m); navigate('mkt-detail'); }}>
               <div className="h-[90px] flex items-center justify-center bg-[#FFFFFF]">
                 {getMarketArtSVG(m.artist, 60)}
