@@ -19,48 +19,48 @@ const Btn = ({ children, variant = 'primary', portal = 'inv', onClick, disabled,
   const base = "px-4 py-2.5 rounded-[10px] font-semibold text-sm transition-all duration-300 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed";
   const variants: Record<string, string> = {
     primary: portal === 'inv'
-      ? "bg-[#C8B8FF] text-[#0C0C10] hover:opacity-90 hover:-translate-y-[1px]"
-      : "bg-[#7DFFC0] text-[#0C0C10] hover:opacity-90 hover:-translate-y-[1px]",
-    secondary: "bg-[#252530] text-[#F0EDE8] border border-[rgba(255,255,255,0.06)] hover:border-[rgba(255,255,255,0.12)] hover:-translate-y-[1px]",
-    ghost: "bg-transparent text-[#A8A4B8] hover:text-[#F0EDE8]",
-    danger: "bg-[rgba(248,113,113,0.1)] text-[#F87171] border border-[rgba(248,113,113,0.2)] hover:bg-[rgba(248,113,113,0.2)]",
-    success: "bg-[rgba(110,231,183,0.1)] text-[#6EE7B7] border border-[rgba(110,231,183,0.2)] hover:bg-[rgba(110,231,183,0.2)]",
-    warning: "bg-[rgba(252,211,77,0.1)] text-[#FCD34D] border border-[rgba(252,211,77,0.2)] hover:bg-[rgba(252,211,77,0.2)]",
+      ? "bg-[#7C5CFC] text-[#F8F8FC] hover:opacity-90 hover:-translate-y-[1px]"
+      : "bg-[#10B981] text-[#F8F8FC] hover:opacity-90 hover:-translate-y-[1px]",
+    secondary: "bg-[#F0F0F5] text-[#1A1A2E] border border-[rgba(0,0,0,0.08)] hover:border-[rgba(0,0,0,0.12)] hover:-translate-y-[1px]",
+    ghost: "bg-transparent text-[#6B6B8A] hover:text-[#1A1A2E]",
+    danger: "bg-[rgba(220,38,38,0.1)] text-[#DC2626] border border-[rgba(220,38,38,0.15)] hover:bg-[rgba(220,38,38,0.15)]",
+    success: "bg-[rgba(5,150,105,0.1)] text-[#059669] border border-[rgba(5,150,105,0.15)] hover:bg-[rgba(5,150,105,0.15)]",
+    warning: "bg-[rgba(217,119,6,0.1)] text-[#D97706] border border-[rgba(217,119,6,0.15)] hover:bg-[rgba(217,119,6,0.15)]",
   };
   return <button className={`${base} ${variants[variant] || variants.primary} ${className}`} onClick={onClick} disabled={disabled} style={style}>{children}</button>;
 };
 
 const Tag = ({ children, variant = 'inv' }: any) => {
   const variants: Record<string, string> = {
-    success: "bg-[rgba(110,231,183,0.1)] text-[#6EE7B7] border-[rgba(110,231,183,0.2)]",
-    warning: "bg-[rgba(252,211,77,0.1)] text-[#FCD34D] border-[rgba(252,211,77,0.2)]",
-    danger: "bg-[rgba(248,113,113,0.1)] text-[#F87171] border-[rgba(248,113,113,0.2)]",
-    inv: "bg-[rgba(200,184,255,0.12)] text-[#C8B8FF] border-[rgba(200,184,255,0.2)]",
-    mus: "bg-[rgba(125,255,192,0.1)] text-[#7DFFC0] border-[rgba(125,255,192,0.2)]",
-    muted: "bg-[rgba(255,255,255,0.04)] text-[#A8A4B8] border-[rgba(255,255,255,0.08)]",
+    success: "bg-[rgba(5,150,105,0.1)] text-[#059669] border-[rgba(5,150,105,0.15)]",
+    warning: "bg-[rgba(217,119,6,0.1)] text-[#D97706] border-[rgba(217,119,6,0.15)]",
+    danger: "bg-[rgba(220,38,38,0.1)] text-[#DC2626] border-[rgba(220,38,38,0.15)]",
+    inv: "bg-[rgba(124,92,252,0.1)] text-[#7C5CFC] border-[rgba(124,92,252,0.15)]",
+    mus: "bg-[rgba(16,185,129,0.1)] text-[#10B981] border-[rgba(16,185,129,0.15)]",
+    muted: "bg-[rgba(0,0,0,0.04)] text-[#6B6B8A] border-[rgba(0,0,0,0.08)]",
   };
   return <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold border ${variants[variant] || variants.inv}`}>{children}</span>;
 };
 
 const VoteBar = ({ forPct, againstPct, abstainPct }: { forPct: number; againstPct: number; abstainPct: number }) => (
-  <div className="w-full h-1.5 rounded-full overflow-hidden flex bg-[rgba(255,255,255,0.05)]">
-    <div className="h-full bg-[#6EE7B7] transition-all duration-700" style={{ width: `${forPct}%` }} />
-    <div className="h-full bg-[#F87171] transition-all duration-700" style={{ width: `${againstPct}%` }} />
-    <div className="h-full bg-[rgba(255,255,255,0.1)] transition-all duration-700" style={{ width: `${abstainPct}%` }} />
+  <div className="w-full h-1.5 rounded-full overflow-hidden flex bg-[rgba(0,0,0,0.06)]">
+    <div className="h-full bg-[#059669] transition-all duration-700" style={{ width: `${forPct}%` }} />
+    <div className="h-full bg-[#DC2626] transition-all duration-700" style={{ width: `${againstPct}%` }} />
+    <div className="h-full bg-[rgba(0,0,0,0.08)] transition-all duration-700" style={{ width: `${abstainPct}%` }} />
   </div>
 );
 
 const MetricTile = ({ label, value, sub, portal = 'inv' }: any) => (
-  <div className="bg-[#252530] border border-[rgba(255,255,255,0.06)] rounded-xl p-5">
-    <div className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#5C5870] mb-2">{label}</div>
-    <div className="font-serif-dm text-[28px] text-[#F0EDE8]">{value}</div>
-    {sub && <div className="text-[12px] text-[#A8A4B8] mt-1">{sub}</div>}
+  <div className="bg-[#F0F0F5] border border-[rgba(0,0,0,0.08)] rounded-xl p-5">
+    <div className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#9494B0] mb-2">{label}</div>
+    <div className="font-serif-dm text-[28px] text-[#1A1A2E]">{value}</div>
+    {sub && <div className="text-[12px] text-[#6B6B8A] mt-1">{sub}</div>}
   </div>
 );
 
 const Card = ({ children, className = '', hover = true, portal = 'inv' }: any) => (
-  <div className={`bg-[#1C1C22] border border-[rgba(255,255,255,0.06)] rounded-2xl p-6 transition-all duration-300 ${hover ? `hover:border-[rgba(255,255,255,0.12)] hover:-translate-y-[2px]` : ''} ${className}`}
-    style={{ boxShadow: '0 1px 0 rgba(255,255,255,0.04), 0 4px 24px rgba(0,0,0,0.4)' }}>
+  <div className={`bg-[#FFFFFF] border border-[rgba(0,0,0,0.08)] rounded-2xl p-6 transition-all duration-300 ${hover ? `hover:border-[rgba(0,0,0,0.12)] hover:-translate-y-[2px]` : ''} ${className}`}
+    style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 24px rgba(0,0,0,0.06)' }}>
     {children}
   </div>
 );
@@ -71,12 +71,12 @@ const ScreenWrap = ({ children, key: k }: any) => (
 
 const CompliancePanel = () => (
   <Card>
-    <div className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#5C5870] mb-4">Compliance Status</div>
+    <div className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#9494B0] mb-4">Compliance Status</div>
     <div className="space-y-2">
       {COMPLIANCE_ITEMS.map(c => (
         <div key={c} className="flex items-center justify-between text-sm">
-          <span className="text-[#A8A4B8]">{c}</span>
-          <span className="text-[#6EE7B7] text-xs font-medium">✓ Compliant</span>
+          <span className="text-[#6B6B8A]">{c}</span>
+          <span className="text-[#059669] text-xs font-medium">✓ Compliant</span>
         </div>
       ))}
     </div>
@@ -113,7 +113,7 @@ export default function ParadigmShift() {
   const [proposals, setProposals] = useState(PROPOSALS_INIT.map(p => ({ ...p })));
   const [musProposals, setMusProposals] = useState(MUS_PROPOSALS_INIT.map(p => ({ ...p })));
 
-  const accent = portal === 'inv' ? '#C8B8FF' : '#7DFFC0';
+  const accent = portal === 'inv' ? '#7C5CFC' : '#10B981';
 
   const navigate = (s: Screen) => { setScreen(s); setOrderConfirmed(false); };
 
@@ -148,7 +148,7 @@ export default function ParadigmShift() {
       { id: 'token-market', label: 'Token Market', icon: '◉' },
     ];
     return (
-      <div className="w-[220px] min-h-screen bg-[#141418] border-r border-[rgba(255,255,255,0.06)] flex flex-col">
+      <div className="w-[220px] min-h-screen bg-[#FFFFFF] border-r border-[rgba(0,0,0,0.08)] flex flex-col">
         <div className="p-5 mb-2">
           <Logo />
         </div>
@@ -158,21 +158,21 @@ export default function ParadigmShift() {
             return (
               <button key={item.id}
                 className={`w-full text-left px-4 py-2.5 rounded-r-[10px] text-sm flex items-center gap-3 transition-all duration-300 ${
-                  active ? 'bg-[rgba(200,184,255,0.12)] text-[#C8B8FF] border-l-2 border-[#C8B8FF]' : 'text-[#A8A4B8] hover:bg-[#252530] hover:text-[#F0EDE8] border-l-2 border-transparent'
+                  active ? 'bg-[rgba(124,92,252,0.1)] text-[#7C5CFC] border-l-2 border-[#7C5CFC]' : 'text-[#6B6B8A] hover:bg-[#F0F0F5] hover:text-[#1A1A2E] border-l-2 border-transparent'
                 }`}
                 style={{ animationDelay: `${i * 50}ms` }}
                 onClick={() => navigate(item.id as Screen)}
               >
                 <span className="text-base">{item.icon}</span>
                 <span>{item.label}</span>
-                {item.badge ? <span className="ml-auto bg-[rgba(200,184,255,0.2)] text-[#C8B8FF] text-[10px] font-bold px-1.5 py-0.5 rounded-full">{item.badge}</span> : null}
+                {item.badge ? <span className="ml-auto bg-[rgba(124,92,252,0.15)] text-[#7C5CFC] text-[10px] font-bold px-1.5 py-0.5 rounded-full">{item.badge}</span> : null}
               </button>
             );
           })}
         </nav>
         <div className="px-3 pb-5">
-          <div className="border-t border-[rgba(255,255,255,0.06)] pt-3">
-            <button className="w-full text-left px-4 py-2.5 text-sm text-[#5C5870] hover:text-[#A8A4B8] transition-colors" onClick={() => navigate('role-select')}>Sign out</button>
+          <div className="border-t border-[rgba(0,0,0,0.08)] pt-3">
+            <button className="w-full text-left px-4 py-2.5 text-sm text-[#9494B0] hover:text-[#6B6B8A] transition-colors" onClick={() => navigate('role-select')}>Sign out</button>
           </div>
         </div>
       </div>
@@ -186,7 +186,7 @@ export default function ParadigmShift() {
       { id: 'mus-gov', label: 'Stakeholder Governance', icon: '◬' },
     ];
     return (
-      <div className="w-[220px] min-h-screen bg-[#141418] border-r border-[rgba(255,255,255,0.06)] flex flex-col">
+      <div className="w-[220px] min-h-screen bg-[#FFFFFF] border-r border-[rgba(0,0,0,0.08)] flex flex-col">
         <div className="p-5 mb-2"><Logo /></div>
         <nav className="flex-1 px-3 space-y-1">
           {items.map((item, i) => {
@@ -194,7 +194,7 @@ export default function ParadigmShift() {
             return (
               <button key={item.id}
                 className={`w-full text-left px-4 py-2.5 rounded-r-[10px] text-sm flex items-center gap-3 transition-all duration-300 ${
-                  active ? 'bg-[rgba(125,255,192,0.1)] text-[#7DFFC0] border-l-2 border-[#7DFFC0]' : 'text-[#A8A4B8] hover:bg-[#252530] hover:text-[#F0EDE8] border-l-2 border-transparent'
+                  active ? 'bg-[rgba(16,185,129,0.1)] text-[#10B981] border-l-2 border-[#10B981]' : 'text-[#6B6B8A] hover:bg-[#F0F0F5] hover:text-[#1A1A2E] border-l-2 border-transparent'
                 }`}
                 onClick={() => navigate(item.id as Screen)}
               >
@@ -205,8 +205,8 @@ export default function ParadigmShift() {
           })}
         </nav>
         <div className="px-3 pb-5">
-          <div className="border-t border-[rgba(255,255,255,0.06)] pt-3">
-            <button className="w-full text-left px-4 py-2.5 text-sm text-[#5C5870] hover:text-[#A8A4B8] transition-colors" onClick={() => navigate('role-select')}>Sign out</button>
+          <div className="border-t border-[rgba(0,0,0,0.08)] pt-3">
+            <button className="w-full text-left px-4 py-2.5 text-sm text-[#9494B0] hover:text-[#6B6B8A] transition-colors" onClick={() => navigate('role-select')}>Sign out</button>
           </div>
         </div>
       </div>
@@ -214,18 +214,18 @@ export default function ParadigmShift() {
   };
 
   const TopBar = ({ breadcrumb }: { breadcrumb: string }) => (
-    <div className="h-14 bg-[#141418] border-b border-[rgba(255,255,255,0.06)] flex items-center justify-between px-6">
+    <div className="h-14 bg-[#FFFFFF] border-b border-[rgba(0,0,0,0.08)] flex items-center justify-between px-6">
       <Logo />
-      <span className="text-[12px] text-[#5C5870] tracking-wide">{breadcrumb}</span>
+      <span className="text-[12px] text-[#9494B0] tracking-wide">{breadcrumb}</span>
     </div>
   );
 
   const Logo = () => (
-    <span className="font-serif-dm text-lg text-[#F0EDE8]">Paradigm<em className="italic">Shift</em></span>
+    <span className="font-serif-dm text-lg text-[#1A1A2E]">Paradigm<em className="italic">Shift</em></span>
   );
 
   const PortalLayout = ({ breadcrumb, children }: { breadcrumb: string; children: React.ReactNode }) => (
-    <div className="flex min-h-screen bg-[#0C0C10]">
+    <div className="flex min-h-screen bg-[#F8F8FC]">
       {portal === 'inv' ? <InvSidebar /> : <MusSidebar />}
       <div className="flex-1 flex flex-col">
         <TopBar breadcrumb={breadcrumb} />
@@ -239,69 +239,69 @@ export default function ParadigmShift() {
   // ─── Screens ─────────────────────────────
 
   const RoleSelect = () => (
-    <div className="min-h-screen flex items-center justify-center bg-[#0C0C10] relative"
-      style={{ background: 'radial-gradient(ellipse at 50% 40%, rgba(200,184,255,0.04) 0%, transparent 65%), #0C0C10' }}>
+    <div className="min-h-screen flex items-center justify-center bg-[#F8F8FC] relative"
+      style={{ background: 'radial-gradient(ellipse at 50% 40%, rgba(124,92,252,0.04) 0%, transparent 65%), #F8F8FC' }}>
       <div className="text-center max-w-[640px] mx-auto px-4">
         <div className="mb-12"><Logo /></div>
-        <h1 className="font-serif-dm text-[42px] italic text-[#F0EDE8] mb-4" style={{ lineHeight: 1.1 }}>Where art history meets ownership</h1>
-        <p className="text-sm text-[#A8A4B8] mb-12">A blockchain platform for cultural institutions and fractional investors</p>
+        <h1 className="font-serif-dm text-[42px] italic text-[#1A1A2E] mb-4" style={{ lineHeight: 1.1 }}>Where art history meets ownership</h1>
+        <p className="text-sm text-[#6B6B8A] mb-12">A blockchain platform for cultural institutions and fractional investors</p>
         <div className="grid grid-cols-2 gap-5 max-w-[560px] mx-auto">
           {/* Investor card */}
-          <div className="bg-[#1C1C22] border border-[rgba(255,255,255,0.06)] rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:border-[rgba(200,184,255,0.25)] hover:shadow-[0_0_40px_rgba(200,184,255,0.15)] hover:-translate-y-1 text-left"
+          <div className="bg-[#FFFFFF] border border-[rgba(0,0,0,0.08)] rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:border-[rgba(124,92,252,0.2)] hover:shadow-[0_0_40px_rgba(124,92,252,0.12)] hover:-translate-y-1 text-left"
             onClick={() => { setPortal('inv'); navigate('inv-login'); }}>
             <div className="mb-4">{getArtworkSVG('rothko', 60)}</div>
-            <h3 className="font-serif-dm text-xl text-[#F0EDE8] mb-2">Fractional Investor</h3>
-            <p className="text-[13px] text-[#A8A4B8] mb-5 leading-relaxed">Own fractions of masterpieces. Participate in governance. Build a cultural portfolio.</p>
-            <span className="text-[#C8B8FF] text-sm font-semibold">Enter portal →</span>
+            <h3 className="font-serif-dm text-xl text-[#1A1A2E] mb-2">Fractional Investor</h3>
+            <p className="text-[13px] text-[#6B6B8A] mb-5 leading-relaxed">Own fractions of masterpieces. Participate in governance. Build a cultural portfolio.</p>
+            <span className="text-[#7C5CFC] text-sm font-semibold">Enter portal →</span>
           </div>
           {/* Museum card */}
-          <div className="bg-[#1C1C22] border border-[rgba(255,255,255,0.06)] rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:border-[rgba(125,255,192,0.25)] hover:shadow-[0_0_40px_rgba(125,255,192,0.12)] hover:-translate-y-1 text-left"
+          <div className="bg-[#FFFFFF] border border-[rgba(0,0,0,0.08)] rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:border-[rgba(16,185,129,0.2)] hover:shadow-[0_0_40px_rgba(16,185,129,0.1)] hover:-translate-y-1 text-left"
             onClick={() => { setPortal('mus'); navigate('mus-login'); }}>
             <div className="mb-4">{getArtworkSVG('kandinsky', 60)}</div>
-            <h3 className="font-serif-dm text-xl text-[#F0EDE8] mb-2">Museum Director</h3>
-            <p className="text-[13px] text-[#A8A4B8] mb-5 leading-relaxed">Tokenize deaccessioned works. Maintain curatorial control. Fund your mission.</p>
-            <span className="text-[#7DFFC0] text-sm font-semibold">Enter portal →</span>
+            <h3 className="font-serif-dm text-xl text-[#1A1A2E] mb-2">Museum Director</h3>
+            <p className="text-[13px] text-[#6B6B8A] mb-5 leading-relaxed">Tokenize deaccessioned works. Maintain curatorial control. Fund your mission.</p>
+            <span className="text-[#10B981] text-sm font-semibold">Enter portal →</span>
           </div>
         </div>
-        <p className="text-[11px] uppercase tracking-[0.08em] text-[#5C5870] mt-16">Non-functional prototype · ParadigmShift v0.3</p>
+        <p className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mt-16">Non-functional prototype · ParadigmShift v0.3</p>
       </div>
     </div>
   );
 
   const LoginScreen = ({ isMuseum }: { isMuseum: boolean }) => {
-    const ac = isMuseum ? '#7DFFC0' : '#C8B8FF';
-    const acGlow = isMuseum ? 'rgba(125,255,192,0.08)' : 'rgba(200,184,255,0.08)';
+    const ac = isMuseum ? '#10B981' : '#7C5CFC';
+    const acGlow = isMuseum ? 'rgba(16,185,129,0.08)' : 'rgba(124,92,252,0.08)';
     return (
-      <div className="min-h-screen flex bg-[#0C0C10]">
+      <div className="min-h-screen flex bg-[#F8F8FC]">
         <div className="w-[40%] flex items-center justify-center p-12">
           <div className="w-full max-w-[340px]">
             <div className="mb-8"><Logo /></div>
-            <p className="text-sm text-[#A8A4B8] mb-1">{isMuseum ? 'Museum Portal' : 'Investor Portal'}</p>
-            <h2 className="font-serif-dm text-2xl text-[#F0EDE8] mb-8">Sign in</h2>
+            <p className="text-sm text-[#6B6B8A] mb-1">{isMuseum ? 'Museum Portal' : 'Investor Portal'}</p>
+            <h2 className="font-serif-dm text-2xl text-[#1A1A2E] mb-8">Sign in</h2>
             <div className="space-y-4">
               <div>
-                <label className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#5C5870] block mb-2">Email</label>
-                <input className="w-full bg-[#252530] border border-[rgba(255,255,255,0.06)] rounded-lg px-3.5 py-2.5 text-sm text-[#F0EDE8] focus:outline-none focus:border-[var(--ring-color)]"
+                <label className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#9494B0] block mb-2">Email</label>
+                <input className="w-full bg-[#F0F0F5] border border-[rgba(0,0,0,0.08)] rounded-lg px-3.5 py-2.5 text-sm text-[#1A1A2E] focus:outline-none focus:border-[var(--ring-color)]"
                   style={{ '--ring-color': ac } as any}
                   defaultValue={isMuseum ? 'director@moma.org' : 'alex.chen@email.com'} />
               </div>
               <div>
-                <label className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#5C5870] block mb-2">Password</label>
-                <input type="password" className="w-full bg-[#252530] border border-[rgba(255,255,255,0.06)] rounded-lg px-3.5 py-2.5 text-sm text-[#F0EDE8] focus:outline-none"
+                <label className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#9494B0] block mb-2">Password</label>
+                <input type="password" className="w-full bg-[#F0F0F5] border border-[rgba(0,0,0,0.08)] rounded-lg px-3.5 py-2.5 text-sm text-[#1A1A2E] focus:outline-none"
                   defaultValue="••••••••" />
               </div>
-              <button className="w-full py-2.5 rounded-[10px] font-semibold text-sm text-[#0C0C10] transition-all hover:opacity-90 mt-2"
+              <button className="w-full py-2.5 rounded-[10px] font-semibold text-sm text-[#F8F8FC] transition-all hover:opacity-90 mt-2"
                 style={{ background: ac }}
                 onClick={() => navigate(isMuseum ? 'mus-dash' : 'inv-dash')}>
                 Sign in
               </button>
             </div>
-            <button className="text-sm text-[#5C5870] hover:text-[#A8A4B8] mt-6 transition-colors" onClick={() => navigate('role-select')}>← Back to role selection</button>
+            <button className="text-sm text-[#9494B0] hover:text-[#6B6B8A] mt-6 transition-colors" onClick={() => navigate('role-select')}>← Back to role selection</button>
           </div>
         </div>
-        <div className="w-[60%] flex items-center justify-center p-16 relative" style={{ background: `radial-gradient(ellipse at 30% 50%, ${acGlow}, transparent 70%), #111115` }}>
+        <div className="w-[60%] flex items-center justify-center p-16 relative" style={{ background: `radial-gradient(ellipse at 30% 50%, ${acGlow}, transparent 70%), #F5F5FA` }}>
           <div className="max-w-[420px]">
-            <h2 className="font-serif-dm text-[28px] italic text-[#F0EDE8] mb-8 leading-tight">
+            <h2 className="font-serif-dm text-[28px] italic text-[#1A1A2E] mb-8 leading-tight">
               {isMuseum ? "Institutional stewardship reimagined for the digital age" : "Bridging institutional stewardship with fractional ownership"}
             </h2>
             <div className="space-y-4">
@@ -311,7 +311,7 @@ export default function ParadigmShift() {
               ).map((t, i) => (
                 <div key={i} className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ background: ac }} />
-                  <p className="text-sm text-[#A8A4B8]">{t}</p>
+                  <p className="text-sm text-[#6B6B8A]">{t}</p>
                 </div>
               ))}
             </div>
@@ -328,8 +328,8 @@ export default function ParadigmShift() {
       {/* Welcome */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="font-serif-dm text-[26px] text-[#F0EDE8]">Good morning, Alex</h1>
-          <p className="text-[12px] text-[#5C5870] mt-1">Last updated · Today 9:14 AM</p>
+          <h1 className="font-serif-dm text-[26px] text-[#1A1A2E]">Good morning, Alex</h1>
+          <p className="text-[12px] text-[#9494B0] mt-1">Last updated · Today 9:14 AM</p>
         </div>
         <div className="flex gap-3">
           <Btn variant="secondary" onClick={() => navigate('marketplace')}>Browse marketplace</Btn>
@@ -341,54 +341,54 @@ export default function ParadigmShift() {
       <div className="grid grid-cols-4 gap-4 mb-8">
         <MetricTile label="Portfolio Value" value="$24,850" sub={<Tag variant="success">+8.4% YTD</Tag>} />
         <MetricTile label="Holdings" value="7" sub="across 4 museums" />
-        <MetricTile label="PSG Tokens" value="1,240" sub={<button className="text-[#C8B8FF] text-xs hover:underline" onClick={() => navigate('token-market')}>View token market →</button>} />
-        <MetricTile label="Active Votes" value="3" sub={<span className="text-[#FCD34D] text-xs">1 closes in 2 days</span>} />
+        <MetricTile label="PSG Tokens" value="1,240" sub={<button className="text-[#7C5CFC] text-xs hover:underline" onClick={() => navigate('token-market')}>View token market →</button>} />
+        <MetricTile label="Active Votes" value="3" sub={<span className="text-[#D97706] text-xs">1 closes in 2 days</span>} />
       </div>
 
       {/* Main grid */}
       <div className="grid grid-cols-[2fr_1fr] gap-5 mb-8">
         <Card>
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-serif-dm text-lg text-[#F0EDE8]">Portfolio Performance</h3>
-            <div className="flex bg-[#252530] rounded-lg p-0.5">
+            <h3 className="font-serif-dm text-lg text-[#1A1A2E]">Portfolio Performance</h3>
+            <div className="flex bg-[#F0F0F5] rounded-lg p-0.5">
               {['6M', '1Y'].map(p => (
-                <button key={p} className={`px-3 py-1 rounded-md text-xs font-medium transition-all ${chartPeriod === p ? 'bg-[rgba(200,184,255,0.12)] text-[#C8B8FF]' : 'text-[#5C5870]'}`}
+                <button key={p} className={`px-3 py-1 rounded-md text-xs font-medium transition-all ${chartPeriod === p ? 'bg-[rgba(124,92,252,0.1)] text-[#7C5CFC]' : 'text-[#9494B0]'}`}
                   onClick={() => setChartPeriod(p)}>{p}</button>
               ))}
             </div>
           </div>
-          <MiniChart data={PORT_CHART} color="#C8B8FF" height={120} />
+          <MiniChart data={PORT_CHART} color="#7C5CFC" height={120} />
           <div className="flex justify-between mt-2 px-1">
             {['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map(m => (
-              <span key={m} className="text-[10px] text-[#5C5870]">{m}</span>
+              <span key={m} className="text-[10px] text-[#9494B0]">{m}</span>
             ))}
           </div>
         </Card>
 
         <Card>
-          <h3 className="font-serif-dm text-lg text-[#F0EDE8] mb-4">Upcoming Votes</h3>
+          <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Upcoming Votes</h3>
           <div className="space-y-3">
             {proposals.filter(p => !p.voted).slice(0, 2).map(p => (
-              <div key={p.id} className="bg-[#252530] rounded-xl p-4 border border-[rgba(255,255,255,0.04)]">
-                <div className="text-sm text-[#F0EDE8] font-medium mb-1">{p.title}</div>
-                <div className="text-xs text-[#5C5870] mb-2">{p.art} · {p.daysLeft}d left</div>
+              <div key={p.id} className="bg-[#F0F0F5] rounded-xl p-4 border border-[rgba(0,0,0,0.04)]">
+                <div className="text-sm text-[#1A1A2E] font-medium mb-1">{p.title}</div>
+                <div className="text-xs text-[#9494B0] mb-2">{p.art} · {p.daysLeft}d left</div>
                 <Tag variant={p.daysLeft <= 3 ? 'warning' : 'inv'}>Pending</Tag>
               </div>
             ))}
           </div>
-          <button className="text-sm text-[#A8A4B8] hover:text-[#C8B8FF] mt-4 transition-colors" onClick={() => navigate('inv-gov')}>All proposals →</button>
+          <button className="text-sm text-[#6B6B8A] hover:text-[#7C5CFC] mt-4 transition-colors" onClick={() => navigate('inv-gov')}>All proposals →</button>
         </Card>
       </div>
 
       {/* Recent holdings */}
       <Card hover={false}>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-serif-dm text-lg text-[#F0EDE8]">Recent Holdings</h3>
-          <button className="text-sm text-[#A8A4B8] hover:text-[#C8B8FF] transition-colors" onClick={() => navigate('inv-holdings')}>View all →</button>
+          <h3 className="font-serif-dm text-lg text-[#1A1A2E]">Recent Holdings</h3>
+          <button className="text-sm text-[#6B6B8A] hover:text-[#7C5CFC] transition-colors" onClick={() => navigate('inv-holdings')}>View all →</button>
         </div>
         <table className="w-full">
           <thead>
-            <tr className="text-[11px] uppercase tracking-[0.08em] text-[#5C5870] border-b border-[rgba(255,255,255,0.06)]">
+            <tr className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] border-b border-[rgba(0,0,0,0.08)]">
               <th className="text-left pb-3 font-semibold">Artwork</th>
               <th className="text-left pb-3 font-semibold">Museum</th>
               <th className="text-right pb-3 font-semibold">Shares</th>
@@ -400,17 +400,17 @@ export default function ParadigmShift() {
           </thead>
           <tbody>
             {ARTWORKS.slice(0, 3).map(a => (
-              <tr key={a.id} className="border-b border-[rgba(255,255,255,0.04)] hover:bg-[#252530] transition-colors cursor-pointer"
+              <tr key={a.id} className="border-b border-[rgba(0,0,0,0.04)] hover:bg-[#F0F0F5] transition-colors cursor-pointer"
                 onClick={() => { setSelectedArt(a); setArtTab('overview'); navigate('artwork-detail'); }}>
                 <td className="py-3 flex items-center gap-3">
                   {getArtworkSVG(a.title, 36)}
-                  <span className="text-sm text-[#F0EDE8]">{a.title.split('(')[0].trim()}</span>
+                  <span className="text-sm text-[#1A1A2E]">{a.title.split('(')[0].trim()}</span>
                 </td>
-                <td className="text-sm text-[#A8A4B8]">{a.museum}</td>
-                <td className="text-right font-mono-dm text-sm text-[#F0EDE8]">{a.shares}</td>
-                <td className="text-right font-mono-dm text-sm text-[#A8A4B8]">${a.avgCost}</td>
-                <td className="text-right font-mono-dm text-sm text-[#F0EDE8]">${a.price}</td>
-                <td className={`text-right font-mono-dm text-sm ${a.pnl >= 0 ? 'text-[#6EE7B7]' : 'text-[#F87171]'}`}>
+                <td className="text-sm text-[#6B6B8A]">{a.museum}</td>
+                <td className="text-right font-mono-dm text-sm text-[#1A1A2E]">{a.shares}</td>
+                <td className="text-right font-mono-dm text-sm text-[#6B6B8A]">${a.avgCost}</td>
+                <td className="text-right font-mono-dm text-sm text-[#1A1A2E]">${a.price}</td>
+                <td className={`text-right font-mono-dm text-sm ${a.pnl >= 0 ? 'text-[#059669]' : 'text-[#DC2626]'}`}>
                   {a.pnl >= 0 ? '+' : ''}{a.pnl}%
                 </td>
                 <td className="text-right">
@@ -434,14 +434,14 @@ export default function ParadigmShift() {
     return (
       <PortalLayout breadcrumb="Investor · My Holdings">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="font-serif-dm text-[26px] text-[#F0EDE8]">My Holdings</h1>
-          <input className="bg-[#252530] border border-[rgba(255,255,255,0.06)] rounded-lg px-3.5 py-2 text-sm text-[#F0EDE8] w-64 focus:outline-none focus:border-[#C8B8FF]"
+          <h1 className="font-serif-dm text-[26px] text-[#1A1A2E]">My Holdings</h1>
+          <input className="bg-[#F0F0F5] border border-[rgba(0,0,0,0.08)] rounded-lg px-3.5 py-2 text-sm text-[#1A1A2E] w-64 focus:outline-none focus:border-[#7C5CFC]"
             placeholder="Search holdings..." value={holdingsSearch} onChange={e => setHoldingsSearch(e.target.value)} />
         </div>
         <Card hover={false}>
           <table className="w-full">
             <thead>
-              <tr className="text-[11px] uppercase tracking-[0.08em] text-[#5C5870] border-b border-[rgba(255,255,255,0.06)]">
+              <tr className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] border-b border-[rgba(0,0,0,0.08)]">
                 {['Artwork', 'Museum', 'Shares', 'Avg Cost', 'Current', 'P&L', 'PSG', 'Actions'].map(h => (
                   <th key={h} className={`pb-3 font-semibold ${h === 'Artwork' || h === 'Museum' ? 'text-left' : 'text-right'}`}>{h}</th>
                 ))}
@@ -449,22 +449,22 @@ export default function ParadigmShift() {
             </thead>
             <tbody>
               {filtered.map(a => (
-                <tr key={a.id} className="border-b border-[rgba(255,255,255,0.04)] hover:bg-[#252530] transition-colors">
+                <tr key={a.id} className="border-b border-[rgba(0,0,0,0.04)] hover:bg-[#F0F0F5] transition-colors">
                   <td className="py-3 flex items-center gap-3">
                     {getArtworkSVG(a.title, 36)}
                     <div>
-                      <div className="text-sm text-[#F0EDE8]">{a.title.split('(')[0].trim()}</div>
-                      <div className="text-[11px] text-[#5C5870]">{a.artist}</div>
+                      <div className="text-sm text-[#1A1A2E]">{a.title.split('(')[0].trim()}</div>
+                      <div className="text-[11px] text-[#9494B0]">{a.artist}</div>
                     </div>
                   </td>
-                  <td className="text-sm text-[#A8A4B8]">{a.museum}</td>
-                  <td className="text-right font-mono-dm text-sm text-[#F0EDE8]">{a.shares}</td>
-                  <td className="text-right font-mono-dm text-sm text-[#A8A4B8]">${a.avgCost}</td>
-                  <td className="text-right font-mono-dm text-sm text-[#F0EDE8]">${a.price}</td>
-                  <td className={`text-right font-mono-dm text-sm ${a.pnl >= 0 ? 'text-[#6EE7B7]' : 'text-[#F87171]'}`}>
+                  <td className="text-sm text-[#6B6B8A]">{a.museum}</td>
+                  <td className="text-right font-mono-dm text-sm text-[#1A1A2E]">{a.shares}</td>
+                  <td className="text-right font-mono-dm text-sm text-[#6B6B8A]">${a.avgCost}</td>
+                  <td className="text-right font-mono-dm text-sm text-[#1A1A2E]">${a.price}</td>
+                  <td className={`text-right font-mono-dm text-sm ${a.pnl >= 0 ? 'text-[#059669]' : 'text-[#DC2626]'}`}>
                     {a.pnl >= 0 ? '+' : ''}{a.pnl}%
                   </td>
-                  <td className="text-right font-mono-dm text-sm text-[#C8B8FF]">{a.tokens}</td>
+                  <td className="text-right font-mono-dm text-sm text-[#7C5CFC]">{a.tokens}</td>
                   <td className="text-right">
                     <div className="flex gap-2 justify-end">
                       <Btn variant="ghost" className="text-xs" onClick={() => { setSelectedArt(a); setArtTab('overview'); navigate('artwork-detail'); }}>View</Btn>
@@ -489,16 +489,16 @@ export default function ParadigmShift() {
 
     return (
       <PortalLayout breadcrumb={`Investor · Holdings · ${a.title.split('(')[0].trim()}`}>
-        <button className="text-sm text-[#C8B8FF] hover:underline mb-6 block" onClick={() => navigate('inv-holdings')}>← My Holdings</button>
+        <button className="text-sm text-[#7C5CFC] hover:underline mb-6 block" onClick={() => navigate('inv-holdings')}>← My Holdings</button>
 
         {/* Hero */}
         <div className="flex items-start gap-6 mb-6">
-          <div className="rounded-2xl overflow-hidden" style={{ boxShadow: '0 0 30px rgba(200,184,255,0.1)' }}>
+          <div className="rounded-2xl overflow-hidden" style={{ boxShadow: '0 0 30px rgba(124,92,252,0.08)' }}>
             {getArtworkSVG(a.title, 80)}
           </div>
           <div className="flex-1">
-            <h1 className="font-serif-dm text-[28px] text-[#F0EDE8]">{a.title}</h1>
-            <p className="text-sm text-[#A8A4B8] mt-1">{a.artist} · {a.museum} · {a.year}</p>
+            <h1 className="font-serif-dm text-[28px] text-[#1A1A2E]">{a.title}</h1>
+            <p className="text-sm text-[#6B6B8A] mt-1">{a.artist} · {a.museum} · {a.year}</p>
             <div className="flex gap-2 mt-3">
               <Tag variant="inv">Fractional</Tag>
               <Tag variant="success">Verified</Tag>
@@ -511,10 +511,10 @@ export default function ParadigmShift() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-1 border-b border-[rgba(255,255,255,0.06)] mb-6">
+        <div className="flex gap-1 border-b border-[rgba(0,0,0,0.08)] mb-6">
           {tabs.map(t => (
             <button key={t} className={`px-4 py-3 text-sm font-medium capitalize transition-all border-b-2 ${
-              artTab === t ? 'text-[#C8B8FF] border-[#C8B8FF]' : 'text-[#5C5870] border-transparent hover:text-[#A8A4B8]'
+              artTab === t ? 'text-[#7C5CFC] border-[#7C5CFC]' : 'text-[#9494B0] border-transparent hover:text-[#6B6B8A]'
             }`} onClick={() => setArtTab(t)}>{t === 'benefits' ? 'Museum Benefits' : t}</button>
           ))}
         </div>
@@ -523,8 +523,8 @@ export default function ParadigmShift() {
           <div className="grid grid-cols-[2fr_1fr] gap-6">
             <div className="space-y-6">
               <Card>
-                <h3 className="font-serif-dm text-lg text-[#F0EDE8] mb-3">About</h3>
-                <p className="text-sm text-[#A8A4B8] leading-relaxed">A seminal work from the artist's mature period, this piece exemplifies the emotional depth and chromatic intensity that defined the abstract expressionist movement. Currently on permanent display.</p>
+                <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-3">About</h3>
+                <p className="text-sm text-[#6B6B8A] leading-relaxed">A seminal work from the artist's mature period, this piece exemplifies the emotional depth and chromatic intensity that defined the abstract expressionist movement. Currently on permanent display.</p>
               </Card>
               <div className="grid grid-cols-2 gap-4">
                 <MetricTile label="Annual Visitors" value="3.2M" />
@@ -533,13 +533,13 @@ export default function ParadigmShift() {
                 <MetricTile label="Provenance" value="Verified" />
               </div>
             </div>
-            <Card className="relative" style={{ background: 'radial-gradient(ellipse at 50% 30%, rgba(200,184,255,0.06), #1C1C22 70%)' }}>
-              <div className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#5C5870] mb-3">Your Position</div>
-              <div className="font-serif-dm text-[36px] text-[#F0EDE8]">${(a.shares * a.price).toLocaleString()}</div>
-              <p className="text-[12px] text-[#A8A4B8] mt-1">{a.shares} shares · ${a.price}/share</p>
+            <Card className="relative" style={{ background: 'radial-gradient(ellipse at 50% 30%, rgba(124,92,252,0.06), #FFFFFF 70%)' }}>
+              <div className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#9494B0] mb-3">Your Position</div>
+              <div className="font-serif-dm text-[36px] text-[#1A1A2E]">${(a.shares * a.price).toLocaleString()}</div>
+              <p className="text-[12px] text-[#6B6B8A] mt-1">{a.shares} shares · ${a.price}/share</p>
               <div className="mt-3"><Tag variant={a.pnl >= 0 ? 'success' : 'danger'}>{a.pnl >= 0 ? '+' : ''}{a.pnl}%</Tag></div>
               {a.tokens > 0 && (
-                <div className="mt-4 pt-4 border-t border-[rgba(255,255,255,0.06)]">
+                <div className="mt-4 pt-4 border-t border-[rgba(0,0,0,0.08)]">
                   <Tag variant="inv">{a.tokens} PSG · advisory voting</Tag>
                 </div>
               )}
@@ -547,7 +547,7 @@ export default function ParadigmShift() {
                 <Btn className="flex-1" onClick={() => openTradeModal(a, 'buy')}>Buy more</Btn>
                 <Btn variant="secondary" className="flex-1" onClick={() => openTradeModal(a, 'sell')}>Sell shares</Btn>
               </div>
-              <button className="text-xs text-[#C8B8FF] hover:underline mt-3 block" onClick={() => navigate('token-market')}>View token market →</button>
+              <button className="text-xs text-[#7C5CFC] hover:underline mt-3 block" onClick={() => navigate('token-market')}>View token market →</button>
             </Card>
           </div>
         )}
@@ -555,19 +555,19 @@ export default function ParadigmShift() {
         {artTab === 'financials' && (
           <div className="space-y-6">
             <Card>
-              <h3 className="font-serif-dm text-lg text-[#F0EDE8] mb-4">Price History</h3>
-              <MiniChart data={PORT_CHART} color="#C8B8FF" height={100} />
+              <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Price History</h3>
+              <MiniChart data={PORT_CHART} color="#7C5CFC" height={100} />
             </Card>
             <Card>
-              <h3 className="font-serif-dm text-lg text-[#F0EDE8] mb-4">Offering Details</h3>
+              <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Offering Details</h3>
               <div className="grid grid-cols-3 gap-4">
                 {[
                   ['Total Shares', '10,000'], ['Float', '3,200'], ['Share Price', `$${a.price}`],
                   ['Market Cap', `$${((a.price * 10000) / 1000000).toFixed(1)}M`], ['Min Purchase', '1 share'], ['Settlement', 'T+2']
                 ].map(([l, v]) => (
                   <div key={l}>
-                    <div className="text-[11px] uppercase tracking-[0.08em] text-[#5C5870] mb-1">{l}</div>
-                    <div className="font-mono-dm text-sm text-[#F0EDE8]">{v}</div>
+                    <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-1">{l}</div>
+                    <div className="font-mono-dm text-sm text-[#1A1A2E]">{v}</div>
                   </div>
                 ))}
               </div>
@@ -577,10 +577,10 @@ export default function ParadigmShift() {
 
         {artTab === 'governance' && (
           <div className="space-y-4">
-            <div className="bg-[rgba(200,184,255,0.08)] border border-[rgba(200,184,255,0.15)] rounded-xl p-4 text-sm text-[#C8B8FF]">
+            <div className="bg-[rgba(124,92,252,0.08)] border border-[rgba(124,92,252,0.12)] rounded-xl p-4 text-sm text-[#7C5CFC]">
               Advisory votes only — museum retains curatorial authority
             </div>
-            {filteredProposals.length === 0 && <p className="text-sm text-[#5C5870]">No active proposals for this artwork.</p>}
+            {filteredProposals.length === 0 && <p className="text-sm text-[#9494B0]">No active proposals for this artwork.</p>}
             {filteredProposals.map(p => (
               <ProposalCard key={p.id} proposal={p} />
             ))}
@@ -594,7 +594,7 @@ export default function ParadigmShift() {
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-lg mb-1">{'🎨🎤📜⚡📧✨'[i]}</div>
-                    <div className="text-sm text-[#F0EDE8] font-medium">{b}</div>
+                    <div className="text-sm text-[#1A1A2E] font-medium">{b}</div>
                   </div>
                   <Tag variant={i < 4 ? 'success' : 'muted'}>{i < 4 ? 'Active' : 'Pending'}</Tag>
                 </div>
@@ -618,18 +618,18 @@ export default function ParadigmShift() {
     return (
       <PortalLayout breadcrumb="Investor · Marketplace">
         <div className="mb-6">
-          <h1 className="font-serif-dm text-[26px] text-[#F0EDE8]">Marketplace</h1>
-          <p className="text-sm text-[#A8A4B8] mt-1">Discover fractional offerings from partner museums</p>
+          <h1 className="font-serif-dm text-[26px] text-[#1A1A2E]">Marketplace</h1>
+          <p className="text-sm text-[#6B6B8A] mt-1">Discover fractional offerings from partner museums</p>
         </div>
 
         {/* Featured */}
-        <div className="bg-[#252530] border border-[rgba(255,255,255,0.06)] rounded-2xl p-8 mb-8 relative overflow-hidden"
-          style={{ background: 'radial-gradient(ellipse at 80% 20%, rgba(200,184,255,0.06), #252530 60%)' }}>
+        <div className="bg-[#F0F0F5] border border-[rgba(0,0,0,0.08)] rounded-2xl p-8 mb-8 relative overflow-hidden"
+          style={{ background: 'radial-gradient(ellipse at 80% 20%, rgba(124,92,252,0.06), #F0F0F5 60%)' }}>
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-[11px] uppercase tracking-[0.08em] text-[#5C5870] mb-2">Featured Offering</div>
-              <h2 className="font-serif-dm text-[22px] italic text-[#F0EDE8] mb-2">Banksy — Mona Lisa (2000)</h2>
-              <p className="text-sm text-[#A8A4B8] mb-4">Christie's acquisition · 4.3× appreciation over 11 years</p>
+              <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-2">Featured Offering</div>
+              <h2 className="font-serif-dm text-[22px] italic text-[#1A1A2E] mb-2">Banksy — Mona Lisa (2000)</h2>
+              <p className="text-sm text-[#6B6B8A] mb-4">Christie's acquisition · 4.3× appreciation over 11 years</p>
               <div className="flex gap-2">
                 <Tag variant="success">12.37% IRR</Tag>
                 <Tag variant="inv">72% funded</Tag>
@@ -643,7 +643,7 @@ export default function ParadigmShift() {
         <div className="flex gap-2 mb-6">
           {['All', 'New', 'Hot'].map(f => (
             <button key={f} className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
-              mktFilter === f ? 'bg-[rgba(200,184,255,0.12)] text-[#C8B8FF]' : 'bg-[#252530] text-[#5C5870] hover:text-[#A8A4B8]'
+              mktFilter === f ? 'bg-[rgba(124,92,252,0.1)] text-[#7C5CFC]' : 'bg-[#F0F0F5] text-[#9494B0] hover:text-[#6B6B8A]'
             }`} onClick={() => setMktFilter(f)}>{f}</button>
           ))}
         </div>
@@ -651,21 +651,21 @@ export default function ParadigmShift() {
         {/* Grid */}
         <div className="grid grid-cols-3 gap-5">
           {filtered.map(m => (
-            <div key={m.id} className="bg-[#1C1C22] border border-[rgba(255,255,255,0.06)] rounded-2xl overflow-hidden transition-all duration-300 hover:border-[rgba(200,184,255,0.25)] hover:-translate-y-1 cursor-pointer"
-              style={{ boxShadow: '0 1px 0 rgba(255,255,255,0.04), 0 4px 24px rgba(0,0,0,0.4)' }}
+            <div key={m.id} className="bg-[#FFFFFF] border border-[rgba(0,0,0,0.08)] rounded-2xl overflow-hidden transition-all duration-300 hover:border-[rgba(124,92,252,0.2)] hover:-translate-y-1 cursor-pointer"
+              style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 24px rgba(0,0,0,0.06)' }}
               onClick={() => { setSelectedMarket(m); navigate('mkt-detail'); }}>
-              <div className="h-[90px] flex items-center justify-center bg-[#141418]">
+              <div className="h-[90px] flex items-center justify-center bg-[#FFFFFF]">
                 {getMarketArtSVG(m.artist, 60)}
               </div>
               <div className="p-5">
-                <div className="text-[11px] uppercase tracking-[0.08em] text-[#5C5870] mb-1">{m.artist}</div>
-                <div className="font-serif-dm text-base text-[#F0EDE8] mb-1">{m.title}</div>
-                <div className="text-[12px] text-[#5C5870] mb-3">{m.museum}</div>
-                <div className="w-full h-1.5 rounded-full bg-[rgba(255,255,255,0.05)] mb-3">
-                  <div className="h-full bg-[#6EE7B7] rounded-full transition-all" style={{ width: `${m.funded}%` }} />
+                <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-1">{m.artist}</div>
+                <div className="font-serif-dm text-base text-[#1A1A2E] mb-1">{m.title}</div>
+                <div className="text-[12px] text-[#9494B0] mb-3">{m.museum}</div>
+                <div className="w-full h-1.5 rounded-full bg-[rgba(0,0,0,0.06)] mb-3">
+                  <div className="h-full bg-[#059669] rounded-full transition-all" style={{ width: `${m.funded}%` }} />
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="font-mono-dm text-sm text-[#F0EDE8]">${m.price}/share</span>
+                  <span className="font-mono-dm text-sm text-[#1A1A2E]">${m.price}/share</span>
                   <div className="flex gap-2">
                     <Tag variant="success">{m.irr} IRR</Tag>
                     {m.tag && <Tag variant={m.tag === 'New' ? 'inv' : m.tag === 'Hot' ? 'warning' : 'muted'}>{m.tag}</Tag>}
@@ -685,14 +685,14 @@ export default function ParadigmShift() {
     const m = selectedMarket;
     return (
       <PortalLayout breadcrumb={`Investor · Marketplace · ${m.title}`}>
-        <button className="text-sm text-[#C8B8FF] hover:underline mb-6 block" onClick={() => navigate('marketplace')}>← Marketplace</button>
+        <button className="text-sm text-[#7C5CFC] hover:underline mb-6 block" onClick={() => navigate('marketplace')}>← Marketplace</button>
         <div className="grid grid-cols-[2fr_1fr] gap-6">
           <div className="space-y-6">
             <div className="flex items-start gap-6">
               {getMarketArtSVG(m.artist, 120)}
               <div>
-                <h1 className="font-serif-dm text-[28px] text-[#F0EDE8]">{m.title}</h1>
-                <p className="text-sm text-[#A8A4B8] mt-1">{m.artist} · {m.museum}</p>
+                <h1 className="font-serif-dm text-[28px] text-[#1A1A2E]">{m.title}</h1>
+                <p className="text-sm text-[#6B6B8A] mt-1">{m.artist} · {m.museum}</p>
                 <div className="flex gap-2 mt-3">
                   {m.tag && <Tag variant="inv">{m.tag}</Tag>}
                   <Tag variant="success">{m.irr} IRR</Tag>
@@ -702,32 +702,32 @@ export default function ParadigmShift() {
 
             {m.artist === 'Banksy' && (
               <>
-                <h3 className="font-serif-dm text-lg text-[#F0EDE8]">Historical Performance</h3>
+                <h3 className="font-serif-dm text-lg text-[#1A1A2E]">Historical Performance</h3>
                 <div className="grid grid-cols-3 gap-3">
                   {BANKSY_PAIRS.map((p, i) => (
-                    <div key={i} className="bg-[#252530] border border-[rgba(255,255,255,0.06)] rounded-xl p-4">
-                      <div className="font-serif-dm text-[24px] text-[#F0EDE8]">{p.ret}</div>
-                      <div className="text-[#6EE7B7] text-sm font-mono-dm">{p.irr}</div>
-                      <div className="w-full h-1 rounded bg-[rgba(110,231,183,0.15)] mt-2">
-                        <div className="h-full bg-[#6EE7B7] rounded" style={{ width: `${parseFloat(p.irr)}%` }} />
+                    <div key={i} className="bg-[#F0F0F5] border border-[rgba(0,0,0,0.08)] rounded-xl p-4">
+                      <div className="font-serif-dm text-[24px] text-[#1A1A2E]">{p.ret}</div>
+                      <div className="text-[#059669] text-sm font-mono-dm">{p.irr}</div>
+                      <div className="w-full h-1 rounded bg-[rgba(5,150,105,0.12)] mt-2">
+                        <div className="h-full bg-[#059669] rounded" style={{ width: `${parseFloat(p.irr)}%` }} />
                       </div>
                     </div>
                   ))}
                 </div>
-                <div className="bg-[rgba(200,184,255,0.06)] border border-[rgba(200,184,255,0.1)] rounded-xl p-4 text-sm text-[#A8A4B8]">
+                <div className="bg-[rgba(124,92,252,0.06)] border border-[rgba(124,92,252,0.08)] rounded-xl p-4 text-sm text-[#6B6B8A]">
                   12.37% avg annual appreciation · Christie's Jun 2019 · £731,250 acquired · 4.3× over 11 years
                 </div>
               </>
             )}
 
             <Card>
-              <h3 className="font-serif-dm text-lg text-[#F0EDE8] mb-4">Offering Details</h3>
+              <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Offering Details</h3>
               <div className="grid grid-cols-3 gap-4">
                 {[['Total Shares', '10,000'], ['Float', '3,200'], ['Share Price', `$${m.price}`],
                   ['Funded', `${m.funded}%`], ['Min Purchase', '1 share'], ['Settlement', 'T+2']].map(([l, v]) => (
                   <div key={l}>
-                    <div className="text-[11px] uppercase tracking-[0.08em] text-[#5C5870] mb-1">{l}</div>
-                    <div className="font-mono-dm text-sm text-[#F0EDE8]">{v}</div>
+                    <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-1">{l}</div>
+                    <div className="font-mono-dm text-sm text-[#1A1A2E]">{v}</div>
                   </div>
                 ))}
               </div>
@@ -737,36 +737,36 @@ export default function ParadigmShift() {
           {/* Purchase card */}
           <div className="sticky top-8">
             <Card>
-              <h3 className="font-serif-dm text-[22px] text-[#F0EDE8] mb-1">Buy shares</h3>
-              <p className="text-[12px] text-[#5C5870] mb-5">{m.title} · ${m.price}/share</p>
+              <h3 className="font-serif-dm text-[22px] text-[#1A1A2E] mb-1">Buy shares</h3>
+              <p className="text-[12px] text-[#9494B0] mb-5">{m.title} · ${m.price}/share</p>
 
               <div className="flex items-center gap-4 mb-5">
-                <button className="w-8 h-8 rounded-lg bg-[#252530] text-[#F0EDE8] border border-[rgba(255,255,255,0.06)] flex items-center justify-center hover:bg-[#2E2E3A] transition-colors"
+                <button className="w-8 h-8 rounded-lg bg-[#F0F0F5] text-[#1A1A2E] border border-[rgba(0,0,0,0.08)] flex items-center justify-center hover:bg-[#E5E5EC] transition-colors"
                   onClick={() => setTradeQty(Math.max(1, tradeQty - 1))}>−</button>
-                <span className="font-mono-dm text-2xl font-bold text-[#F0EDE8] w-12 text-center">{tradeQty}</span>
-                <button className="w-8 h-8 rounded-lg bg-[#252530] text-[#F0EDE8] border border-[rgba(255,255,255,0.06)] flex items-center justify-center hover:bg-[#2E2E3A] transition-colors"
+                <span className="font-mono-dm text-2xl font-bold text-[#1A1A2E] w-12 text-center">{tradeQty}</span>
+                <button className="w-8 h-8 rounded-lg bg-[#F0F0F5] text-[#1A1A2E] border border-[rgba(0,0,0,0.08)] flex items-center justify-center hover:bg-[#E5E5EC] transition-colors"
                   onClick={() => setTradeQty(tradeQty + 1)}>+</button>
               </div>
 
-              <div className="border-t border-[rgba(255,255,255,0.06)] pt-4 space-y-2">
-                <div className="flex justify-between text-sm"><span className="text-[#A8A4B8]">Subtotal</span><span className="font-mono-dm text-[#F0EDE8]">${(tradeQty * m.price).toLocaleString()}</span></div>
-                <div className="flex justify-between text-sm"><span className="text-[#A8A4B8]">Fee (0.5%)</span><span className="font-mono-dm text-[#A8A4B8]">${(tradeQty * m.price * 0.005).toFixed(2)}</span></div>
-                <div className="flex justify-between text-sm font-bold pt-2 border-t border-[rgba(255,255,255,0.06)]">
-                  <span className="text-[#F0EDE8]">Total</span>
-                  <span className="font-mono-dm text-[#F0EDE8] text-base">${(tradeQty * m.price * 1.005).toFixed(2)}</span>
+              <div className="border-t border-[rgba(0,0,0,0.08)] pt-4 space-y-2">
+                <div className="flex justify-between text-sm"><span className="text-[#6B6B8A]">Subtotal</span><span className="font-mono-dm text-[#1A1A2E]">${(tradeQty * m.price).toLocaleString()}</span></div>
+                <div className="flex justify-between text-sm"><span className="text-[#6B6B8A]">Fee (0.5%)</span><span className="font-mono-dm text-[#6B6B8A]">${(tradeQty * m.price * 0.005).toFixed(2)}</span></div>
+                <div className="flex justify-between text-sm font-bold pt-2 border-t border-[rgba(0,0,0,0.08)]">
+                  <span className="text-[#1A1A2E]">Total</span>
+                  <span className="font-mono-dm text-[#1A1A2E] text-base">${(tradeQty * m.price * 1.005).toFixed(2)}</span>
                 </div>
               </div>
 
-              <div className="bg-[rgba(200,184,255,0.08)] rounded-lg p-3 mt-4 text-xs text-[#C8B8FF]">
+              <div className="bg-[rgba(124,92,252,0.08)] rounded-lg p-3 mt-4 text-xs text-[#7C5CFC]">
                 You will receive {tradeQty * 10} PSG governance tokens with this purchase.
               </div>
-              <div className="flex items-center gap-2 mt-3"><span className="text-[#6EE7B7] text-xs">✓</span><span className="text-xs text-[#6EE7B7]">KYC verified</span></div>
+              <div className="flex items-center gap-2 mt-3"><span className="text-[#059669] text-xs">✓</span><span className="text-xs text-[#059669]">KYC verified</span></div>
 
               <Btn className="w-full mt-5" onClick={confirmOrder}>Confirm purchase →</Btn>
-              <p className="text-[10px] text-[#5C5870] mt-3 text-center">For offering circular, visit sec.gov</p>
+              <p className="text-[10px] text-[#9494B0] mt-3 text-center">For offering circular, visit sec.gov</p>
 
               {orderConfirmed && (
-                <div className="bg-[rgba(110,231,183,0.1)] border border-[rgba(110,231,183,0.2)] rounded-lg p-3 mt-3 text-sm text-[#6EE7B7] screen-enter">
+                <div className="bg-[rgba(5,150,105,0.1)] border border-[rgba(5,150,105,0.15)] rounded-lg p-3 mt-3 text-sm text-[#059669] screen-enter">
                   ✓ Order confirmed · Tokens allocated on settlement
                 </div>
               )}
@@ -784,17 +784,17 @@ export default function ParadigmShift() {
       setProposals(prev => prev.map(pr => pr.id === p.id ? { ...pr, voted: vote } : pr));
     };
     return (
-      <Card className={!p.voted ? 'border-[rgba(200,184,255,0.15)]' : ''}>
+      <Card className={!p.voted ? 'border-[rgba(124,92,252,0.12)]' : ''}>
         <div className="flex items-start justify-between mb-2">
           <div>
-            <h4 className="font-serif-dm text-base text-[#F0EDE8]">{p.title}</h4>
-            <p className="text-[12px] text-[#5C5870] mt-0.5">{p.art} · Closes {p.closes} · {p.daysLeft} days left</p>
+            <h4 className="font-serif-dm text-base text-[#1A1A2E]">{p.title}</h4>
+            <p className="text-[12px] text-[#9494B0] mt-0.5">{p.art} · Closes {p.closes} · {p.daysLeft} days left</p>
           </div>
           <Tag variant={p.voted ? 'success' : p.daysLeft <= 3 ? 'warning' : 'inv'}>{p.voted ? `Voted ${p.voted}` : 'Pending'}</Tag>
         </div>
-        <p className="text-sm text-[#A8A4B8] mb-3">{p.desc}</p>
+        <p className="text-sm text-[#6B6B8A] mb-3">{p.desc}</p>
         <VoteBar forPct={p.forPct} againstPct={p.againstPct} abstainPct={p.abstainPct} />
-        <div className="flex gap-4 mt-1 text-[11px] text-[#5C5870]">
+        <div className="flex gap-4 mt-1 text-[11px] text-[#9494B0]">
           <span>{p.forPct}% For</span><span>{p.againstPct}% Against</span><span>{p.abstainPct}% Abstain</span>
         </div>
         {!p.voted ? (
@@ -804,7 +804,7 @@ export default function ParadigmShift() {
             <Btn variant="ghost" className="text-xs" onClick={() => handleVote('Abstain')}>Abstain</Btn>
           </div>
         ) : (
-          <div className="bg-[rgba(110,231,183,0.08)] border border-[rgba(110,231,183,0.15)] rounded-lg p-3 mt-4 text-sm text-[#6EE7B7] screen-enter">
+          <div className="bg-[rgba(5,150,105,0.08)] border border-[rgba(5,150,105,0.12)] rounded-lg p-3 mt-4 text-sm text-[#059669] screen-enter">
             ✓ Vote ({p.voted}) recorded on-chain · {selectedArt?.tokens || 120} PSG applied
           </div>
         )}
@@ -818,16 +818,16 @@ export default function ParadigmShift() {
     <PortalLayout breadcrumb="Investor · Governance">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="font-serif-dm text-[26px] text-[#F0EDE8]">Governance</h1>
-          <p className="text-sm text-[#A8A4B8] mt-1">Advisory votes · weighted by PSG balance</p>
+          <h1 className="font-serif-dm text-[26px] text-[#1A1A2E]">Governance</h1>
+          <p className="text-sm text-[#6B6B8A] mt-1">Advisory votes · weighted by PSG balance</p>
         </div>
         <div className="flex items-center gap-4">
           <Tag variant="inv">1,240 PSG</Tag>
-          <button className="text-sm text-[#C8B8FF] hover:underline" onClick={() => navigate('token-market')}>Trade tokens →</button>
+          <button className="text-sm text-[#7C5CFC] hover:underline" onClick={() => navigate('token-market')}>Trade tokens →</button>
         </div>
       </div>
 
-      <div className="bg-[rgba(200,184,255,0.06)] border border-[rgba(200,184,255,0.12)] rounded-xl p-4 text-sm text-[#C8B8FF] mb-6">
+      <div className="bg-[rgba(124,92,252,0.06)] border border-[rgba(124,92,252,0.1)] rounded-xl p-4 text-sm text-[#7C5CFC] mb-6">
         Advisory votes only. Museums retain final curatorial authority. Votes are recorded on-chain.
       </div>
 
@@ -837,26 +837,26 @@ export default function ParadigmShift() {
         </div>
         <div className="space-y-4">
           <Card>
-            <div className="text-[11px] uppercase tracking-[0.08em] text-[#5C5870] mb-4">Voting Power (PSG)</div>
+            <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-4">Voting Power (PSG)</div>
             <div className="space-y-2">
               {ARTWORKS.filter(a => a.tokens > 0).map(a => (
                 <div key={a.id} className="flex justify-between text-sm">
-                  <span className="text-[#A8A4B8]">{a.title.split('(')[0].trim()}</span>
-                  <span className="font-mono-dm text-[#C8B8FF]">{a.tokens}</span>
+                  <span className="text-[#6B6B8A]">{a.title.split('(')[0].trim()}</span>
+                  <span className="font-mono-dm text-[#7C5CFC]">{a.tokens}</span>
                 </div>
               ))}
             </div>
           </Card>
           <Card>
-            <div className="text-[11px] uppercase tracking-[0.08em] text-[#5C5870] mb-4">Past Votes</div>
+            <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-4">Past Votes</div>
             <div className="space-y-3">
               <div className="text-sm">
-                <div className="text-[#F0EDE8]">Frame restoration — de Kooning</div>
-                <div className="text-xs text-[#5C5870]">Voted For · Passed 82%</div>
+                <div className="text-[#1A1A2E]">Frame restoration — de Kooning</div>
+                <div className="text-xs text-[#9494B0]">Voted For · Passed 82%</div>
               </div>
               <div className="text-sm">
-                <div className="text-[#F0EDE8]">Exhibition tour — Van Gogh</div>
-                <div className="text-xs text-[#5C5870]">Abstained · Passed 67%</div>
+                <div className="text-[#1A1A2E]">Exhibition tour — Van Gogh</div>
+                <div className="text-xs text-[#9494B0]">Abstained · Passed 67%</div>
               </div>
             </div>
           </Card>
@@ -870,10 +870,10 @@ export default function ParadigmShift() {
 
   const TokenMarket = () => (
     <PortalLayout breadcrumb="Investor · Token Market">
-      <h1 className="font-serif-dm text-[26px] text-[#F0EDE8] mb-1">PSG Token Market</h1>
-      <p className="text-sm text-[#A8A4B8] mb-6">Trade artwork-specific governance tokens</p>
+      <h1 className="font-serif-dm text-[26px] text-[#1A1A2E] mb-1">PSG Token Market</h1>
+      <p className="text-sm text-[#6B6B8A] mb-6">Trade artwork-specific governance tokens</p>
 
-      <div className="bg-[rgba(200,184,255,0.06)] border border-[rgba(200,184,255,0.12)] rounded-xl p-4 text-sm text-[#C8B8FF] mb-6">
+      <div className="bg-[rgba(124,92,252,0.06)] border border-[rgba(124,92,252,0.1)] rounded-xl p-4 text-sm text-[#7C5CFC] mb-6">
         PSG tokens carry artwork-specific advisory voting rights · chain-agnostic · rights transfer to buyer immediately
       </div>
 
@@ -887,10 +887,10 @@ export default function ParadigmShift() {
       <div className="grid grid-cols-[3fr_2fr] gap-6">
         <div className="space-y-6">
           <Card hover={false}>
-            <h3 className="font-serif-dm text-lg text-[#F0EDE8] mb-4">Token Markets</h3>
+            <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Token Markets</h3>
             <table className="w-full">
               <thead>
-                <tr className="text-[11px] uppercase tracking-[0.08em] text-[#5C5870] border-b border-[rgba(255,255,255,0.06)]">
+                <tr className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] border-b border-[rgba(0,0,0,0.08)]">
                   <th className="text-left pb-3 font-semibold">Artwork</th>
                   <th className="text-right pb-3 font-semibold">Price</th>
                   <th className="text-right pb-3 font-semibold">24h</th>
@@ -900,13 +900,13 @@ export default function ParadigmShift() {
               </thead>
               <tbody>
                 {TOKEN_MARKETS.map(t => (
-                  <tr key={t.art} className="border-b border-[rgba(255,255,255,0.04)] hover:bg-[#252530] transition-colors">
-                    <td className="py-3 text-sm text-[#F0EDE8]">{t.art}</td>
-                    <td className="text-right font-mono-dm text-sm text-[#F0EDE8]">${t.price.toFixed(2)}</td>
-                    <td className={`text-right font-mono-dm text-sm ${t.change >= 0 ? 'text-[#6EE7B7]' : 'text-[#F87171]'}`}>
+                  <tr key={t.art} className="border-b border-[rgba(0,0,0,0.04)] hover:bg-[#F0F0F5] transition-colors">
+                    <td className="py-3 text-sm text-[#1A1A2E]">{t.art}</td>
+                    <td className="text-right font-mono-dm text-sm text-[#1A1A2E]">${t.price.toFixed(2)}</td>
+                    <td className={`text-right font-mono-dm text-sm ${t.change >= 0 ? 'text-[#059669]' : 'text-[#DC2626]'}`}>
                       {t.change >= 0 ? '+' : ''}{t.change}%
                     </td>
-                    <td className="text-right font-mono-dm text-sm text-[#A8A4B8]">{t.vol}</td>
+                    <td className="text-right font-mono-dm text-sm text-[#6B6B8A]">{t.vol}</td>
                     <td className="text-right"><Btn className="text-xs" onClick={() => openTokenModal(t.art)}>Trade</Btn></td>
                   </tr>
                 ))}
@@ -915,23 +915,23 @@ export default function ParadigmShift() {
           </Card>
 
           <Card>
-            <h3 className="font-serif-dm text-lg text-[#F0EDE8] mb-4">Order Book · Rothko No. 61</h3>
+            <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Order Book · Rothko No. 61</h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <div className="text-[11px] uppercase tracking-[0.08em] text-[#6EE7B7] mb-2 font-semibold">Bids</div>
+                <div className="text-[11px] uppercase tracking-[0.08em] text-[#059669] mb-2 font-semibold">Bids</div>
                 {[['$4.80', '240'], ['$4.75', '120'], ['$4.70', '380'], ['$4.65', '90']].map(([p, q]) => (
                   <div key={p} className="flex justify-between text-sm py-1">
-                    <span className="font-mono-dm text-[#6EE7B7]">{p}</span>
-                    <span className="font-mono-dm text-[#A8A4B8]">{q}</span>
+                    <span className="font-mono-dm text-[#059669]">{p}</span>
+                    <span className="font-mono-dm text-[#6B6B8A]">{q}</span>
                   </div>
                 ))}
               </div>
               <div>
-                <div className="text-[11px] uppercase tracking-[0.08em] text-[#F87171] mb-2 font-semibold">Asks</div>
+                <div className="text-[11px] uppercase tracking-[0.08em] text-[#DC2626] mb-2 font-semibold">Asks</div>
                 {[['$4.85', '60'], ['$4.90', '150'], ['$4.95', '200'], ['$5.00', '400']].map(([p, q]) => (
                   <div key={p} className="flex justify-between text-sm py-1">
-                    <span className="font-mono-dm text-[#F87171]">{p}</span>
-                    <span className="font-mono-dm text-[#A8A4B8]">{q}</span>
+                    <span className="font-mono-dm text-[#DC2626]">{p}</span>
+                    <span className="font-mono-dm text-[#6B6B8A]">{q}</span>
                   </div>
                 ))}
               </div>
@@ -941,36 +941,36 @@ export default function ParadigmShift() {
 
         <div className="space-y-6">
           <Card>
-            <h3 className="font-serif-dm text-lg text-[#F0EDE8] mb-3">Rothko PSG · 7d</h3>
-            <MiniChart data={TOKEN_CHART} color="#C8B8FF" height={80} />
-            <div className="flex justify-between mt-2 text-xs text-[#5C5870]">
+            <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-3">Rothko PSG · 7d</h3>
+            <MiniChart data={TOKEN_CHART} color="#7C5CFC" height={80} />
+            <div className="flex justify-between mt-2 text-xs text-[#9494B0]">
               <span>7d low: $4.21</span><span>7d high: $4.96</span>
             </div>
           </Card>
           <Card>
-            <div className="text-[11px] uppercase tracking-[0.08em] text-[#5C5870] mb-4 font-semibold">Your Token Balances</div>
+            <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-4 font-semibold">Your Token Balances</div>
             {TOKEN_MARKETS.filter(t => t.bal > 0).map(t => (
-              <div key={t.art} className="flex justify-between items-center text-sm py-2 border-b border-[rgba(255,255,255,0.04)]">
-                <span className="text-[#A8A4B8]">{t.art.split(' ').slice(0, 2).join(' ')}</span>
+              <div key={t.art} className="flex justify-between items-center text-sm py-2 border-b border-[rgba(0,0,0,0.04)]">
+                <span className="text-[#6B6B8A]">{t.art.split(' ').slice(0, 2).join(' ')}</span>
                 <div className="flex items-center gap-3">
-                  <span className="font-mono-dm text-[#F0EDE8]">{t.bal}</span>
-                  <button className="text-xs text-[#C8B8FF] hover:underline" onClick={() => openTokenModal(t.art)}>Sell</button>
+                  <span className="font-mono-dm text-[#1A1A2E]">{t.bal}</span>
+                  <button className="text-xs text-[#7C5CFC] hover:underline" onClick={() => openTokenModal(t.art)}>Sell</button>
                 </div>
               </div>
             ))}
           </Card>
           <Card>
-            <div className="text-[11px] uppercase tracking-[0.08em] text-[#5C5870] mb-4 font-semibold">Recent Trades</div>
+            <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-4 font-semibold">Recent Trades</div>
             {[
               { art: 'Rothko', p: '$4.78', type: 'Buy' },
               { art: 'Picasso', p: '$6.15', type: 'Sell' },
               { art: 'Van Gogh', p: '$9.35', type: 'Buy' },
             ].map((t, i) => (
-              <div key={i} className="flex justify-between text-sm py-2 border-b border-[rgba(255,255,255,0.04)]">
-                <span className="text-[#A8A4B8]">{t.art}</span>
+              <div key={i} className="flex justify-between text-sm py-2 border-b border-[rgba(0,0,0,0.04)]">
+                <span className="text-[#6B6B8A]">{t.art}</span>
                 <div className="flex items-center gap-3">
-                  <span className="font-mono-dm text-[#F0EDE8]">{t.p}</span>
-                  <span className={`text-xs font-semibold ${t.type === 'Buy' ? 'text-[#6EE7B7]' : 'text-[#F87171]'}`}>{t.type}</span>
+                  <span className="font-mono-dm text-[#1A1A2E]">{t.p}</span>
+                  <span className={`text-xs font-semibold ${t.type === 'Buy' ? 'text-[#059669]' : 'text-[#DC2626]'}`}>{t.type}</span>
                 </div>
               </div>
             ))}
@@ -986,8 +986,8 @@ export default function ParadigmShift() {
     <PortalLayout breadcrumb="Museum · Overview">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="font-serif-dm text-[26px] text-[#F0EDE8]">Good morning, Dr. Martinez</h1>
-          <p className="text-[12px] text-[#5C5870] mt-1">MoMA · Museum of Modern Art</p>
+          <h1 className="font-serif-dm text-[26px] text-[#1A1A2E]">Good morning, Dr. Martinez</h1>
+          <p className="text-[12px] text-[#9494B0] mt-1">MoMA · Museum of Modern Art</p>
         </div>
         <Btn portal="mus" onClick={() => { setModal('new-proposal'); setNpTitle(''); setNpDesc(''); setOrderConfirmed(false); }}>+ New proposal</Btn>
       </div>
@@ -996,16 +996,16 @@ export default function ParadigmShift() {
         <MetricTile label="Tokenized Value" value="$48.2M" sub="across 6 works" />
         <MetricTile label="Stakeholders" value="2,847" sub={<Tag variant="success">+124 this month</Tag>} />
         <MetricTile label="Mission Alignment" value="94/100" sub={<Tag variant="mus">Cultural Infusion ✓</Tag>} />
-        <MetricTile label="Pending Actions" value="3" sub={<span className="text-[#FCD34D] text-xs">1 requires decision</span>} />
+        <MetricTile label="Pending Actions" value="3" sub={<span className="text-[#D97706] text-xs">1 requires decision</span>} />
       </div>
 
       <div className="grid grid-cols-[2fr_1fr] gap-6">
         <div className="space-y-6">
           <Card hover={false}>
-            <h3 className="font-serif-dm text-lg text-[#F0EDE8] mb-4">Tokenized Collection</h3>
+            <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Tokenized Collection</h3>
             <table className="w-full">
               <thead>
-                <tr className="text-[11px] uppercase tracking-[0.08em] text-[#5C5870] border-b border-[rgba(255,255,255,0.06)]">
+                <tr className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] border-b border-[rgba(0,0,0,0.08)]">
                   {['Title', 'Shares', 'Float', 'Price', 'Stakeholders', ''].map(h => (
                     <th key={h} className={`pb-3 font-semibold ${h === 'Title' ? 'text-left' : 'text-right'}`}>{h}</th>
                   ))}
@@ -1013,15 +1013,15 @@ export default function ParadigmShift() {
               </thead>
               <tbody>
                 {MUS_ARTWORKS.map(a => (
-                  <tr key={a.title} className="border-b border-[rgba(255,255,255,0.04)] hover:bg-[#252530] transition-colors">
+                  <tr key={a.title} className="border-b border-[rgba(0,0,0,0.04)] hover:bg-[#F0F0F5] transition-colors">
                     <td className="py-3 flex items-center gap-3">
                       {getArtworkSVG(a.title, 32)}
-                      <span className="text-sm text-[#F0EDE8]">{a.title}</span>
+                      <span className="text-sm text-[#1A1A2E]">{a.title}</span>
                     </td>
-                    <td className="text-right font-mono-dm text-sm text-[#A8A4B8]">{a.shares.toLocaleString()}</td>
-                    <td className="text-right font-mono-dm text-sm text-[#A8A4B8]">{a.float.toLocaleString()}</td>
-                    <td className="text-right font-mono-dm text-sm text-[#F0EDE8]">${a.price}</td>
-                    <td className="text-right text-sm text-[#A8A4B8]">{a.stakeholders}</td>
+                    <td className="text-right font-mono-dm text-sm text-[#6B6B8A]">{a.shares.toLocaleString()}</td>
+                    <td className="text-right font-mono-dm text-sm text-[#6B6B8A]">{a.float.toLocaleString()}</td>
+                    <td className="text-right font-mono-dm text-sm text-[#1A1A2E]">${a.price}</td>
+                    <td className="text-right text-sm text-[#6B6B8A]">{a.stakeholders}</td>
                     <td className="text-right"><Btn variant="ghost" portal="mus" className="text-xs">Manage</Btn></td>
                   </tr>
                 ))}
@@ -1031,10 +1031,10 @@ export default function ParadigmShift() {
 
           <Card>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-serif-dm text-lg text-[#F0EDE8]">Revenue</h3>
-              <span className="font-mono-dm text-sm text-[#7DFFC0]">YTD: $284K</span>
+              <h3 className="font-serif-dm text-lg text-[#1A1A2E]">Revenue</h3>
+              <span className="font-mono-dm text-sm text-[#10B981]">YTD: $284K</span>
             </div>
-            <MiniChart data={MUS_CHART} color="#7DFFC0" height={80} />
+            <MiniChart data={MUS_CHART} color="#10B981" height={80} />
             <div className="grid grid-cols-2 gap-4 mt-4">
               <MetricTile label="YTD Revenue" value="$284K" />
               <MetricTile label="Q1 Distributions" value="$41K" />
@@ -1044,7 +1044,7 @@ export default function ParadigmShift() {
 
         <div className="space-y-6">
           <Card>
-            <div className="text-[11px] uppercase tracking-[0.08em] text-[#5C5870] mb-4 font-semibold">Pending Decisions</div>
+            <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-4 font-semibold">Pending Decisions</div>
             <div className="space-y-4">
               {musProposals.map(p => (
                 <MusProposalMini key={p.id} proposal={p} />
@@ -1063,9 +1063,9 @@ export default function ParadigmShift() {
       setMusProposals(prev => prev.map(pr => pr.id === p.id ? { ...pr, decision: d } : pr));
     };
     return (
-      <div className="bg-[#252530] rounded-xl p-4 border border-[rgba(255,255,255,0.04)]">
-        <div className="text-sm text-[#F0EDE8] mb-1">{p.title}</div>
-        <div className="text-xs text-[#5C5870] mb-2">Stakeholder consensus: {p.forPct}% For</div>
+      <div className="bg-[#F0F0F5] rounded-xl p-4 border border-[rgba(0,0,0,0.04)]">
+        <div className="text-sm text-[#1A1A2E] mb-1">{p.title}</div>
+        <div className="text-xs text-[#9494B0] mb-2">Stakeholder consensus: {p.forPct}% For</div>
         <VoteBar forPct={p.forPct} againstPct={100 - p.forPct} abstainPct={0} />
         {!p.decision ? (
           <div className="flex gap-2 mt-3">
@@ -1075,9 +1075,9 @@ export default function ParadigmShift() {
           </div>
         ) : (
           <div className={`rounded-lg p-2.5 mt-3 text-xs screen-enter ${
-            p.decision === 'follow' ? 'bg-[rgba(110,231,183,0.08)] text-[#6EE7B7] border border-[rgba(110,231,183,0.15)]' :
-            p.decision === 'override' ? 'bg-[rgba(252,211,77,0.08)] text-[#FCD34D] border border-[rgba(252,211,77,0.15)]' :
-            'bg-[rgba(255,255,255,0.04)] text-[#A8A4B8] border border-[rgba(255,255,255,0.06)]'
+            p.decision === 'follow' ? 'bg-[rgba(5,150,105,0.08)] text-[#059669] border border-[rgba(5,150,105,0.12)]' :
+            p.decision === 'override' ? 'bg-[rgba(217,119,6,0.08)] text-[#D97706] border border-[rgba(217,119,6,0.12)]' :
+            'bg-[rgba(0,0,0,0.04)] text-[#6B6B8A] border border-[rgba(0,0,0,0.08)]'
           }`}>
             {p.decision === 'follow' && '✓ Decision recorded: Approved. Published on-chain.'}
             {p.decision === 'override' && '⚠ Override recorded. Submit rationale — published to token holders within 24h.'}
@@ -1109,7 +1109,7 @@ export default function ParadigmShift() {
     return (
       <PortalLayout breadcrumb="Museum · Engagement & Impact">
         <div className="flex items-center gap-3 mb-6">
-          <h1 className="font-serif-dm text-[26px] text-[#F0EDE8]">Engagement & Impact</h1>
+          <h1 className="font-serif-dm text-[26px] text-[#1A1A2E]">Engagement & Impact</h1>
           <Tag variant="mus">Powered by Cultural Infusion</Tag>
         </div>
 
@@ -1123,19 +1123,19 @@ export default function ParadigmShift() {
         <div className="grid grid-cols-2 gap-6 mb-8">
           <Card>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-serif-dm text-lg text-[#F0EDE8]">Community Engagement by Artwork</h3>
+              <h3 className="font-serif-dm text-lg text-[#1A1A2E]">Community Engagement by Artwork</h3>
               <Tag variant="mus">Cultural Infusion</Tag>
             </div>
             <div className="space-y-4">
               {engData.map(d => (
                 <div key={d.art}>
-                  <div className="text-sm text-[#A8A4B8] mb-1.5">{d.art}</div>
-                  <div className="flex h-5 rounded overflow-hidden bg-[rgba(255,255,255,0.04)]">
-                    <div className="bg-[#7DFFC0] h-full transition-all" style={{ width: `${(d.inPerson / maxEng) * 100}%` }} />
-                    <div className="bg-[#C8B8FF] h-full transition-all" style={{ width: `${(d.digital / maxEng) * 100}%` }} />
-                    <div className="bg-[#FCD34D] h-full transition-all" style={{ width: `${(d.edu / maxEng) * 100}%` }} />
+                  <div className="text-sm text-[#6B6B8A] mb-1.5">{d.art}</div>
+                  <div className="flex h-5 rounded overflow-hidden bg-[rgba(0,0,0,0.04)]">
+                    <div className="bg-[#10B981] h-full transition-all" style={{ width: `${(d.inPerson / maxEng) * 100}%` }} />
+                    <div className="bg-[#7C5CFC] h-full transition-all" style={{ width: `${(d.digital / maxEng) * 100}%` }} />
+                    <div className="bg-[#D97706] h-full transition-all" style={{ width: `${(d.edu / maxEng) * 100}%` }} />
                   </div>
-                  <div className="flex gap-3 mt-1 text-[10px] text-[#5C5870]">
+                  <div className="flex gap-3 mt-1 text-[10px] text-[#9494B0]">
                     <span>{d.inPerson}K in-person</span>
                     <span>{d.digital}K digital</span>
                     <span>{d.edu}K educational</span>
@@ -1144,14 +1144,14 @@ export default function ParadigmShift() {
               ))}
             </div>
             <div className="flex gap-4 mt-4 text-xs">
-              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded bg-[#7DFFC0]" />In-person</span>
-              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded bg-[#C8B8FF]" />Digital</span>
-              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded bg-[#FCD34D]" />Educational</span>
+              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded bg-[#10B981]" />In-person</span>
+              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded bg-[#7C5CFC]" />Digital</span>
+              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded bg-[#D97706]" />Educational</span>
             </div>
           </Card>
 
           <Card>
-            <h3 className="font-serif-dm text-lg text-[#F0EDE8] mb-4">Audience Demographics</h3>
+            <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Audience Demographics</h3>
             <div className="space-y-4">
               {[
                 { label: 'First-time visitors', pct: 34 },
@@ -1161,11 +1161,11 @@ export default function ParadigmShift() {
               ].map(d => (
                 <div key={d.label}>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-[#A8A4B8]">{d.label}</span>
-                    <span className="font-mono-dm text-[#F0EDE8]">{d.pct}%</span>
+                    <span className="text-[#6B6B8A]">{d.label}</span>
+                    <span className="font-mono-dm text-[#1A1A2E]">{d.pct}%</span>
                   </div>
-                  <div className="w-full h-2 rounded bg-[rgba(255,255,255,0.05)]">
-                    <div className="h-full bg-[#7DFFC0] rounded transition-all" style={{ width: `${d.pct}%` }} />
+                  <div className="w-full h-2 rounded bg-[rgba(0,0,0,0.06)]">
+                    <div className="h-full bg-[#10B981] rounded transition-all" style={{ width: `${d.pct}%` }} />
                   </div>
                 </div>
               ))}
@@ -1180,16 +1180,16 @@ export default function ParadigmShift() {
         {/* Mission Alignment */}
         <Card hover={false}>
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-serif-dm text-lg text-[#F0EDE8]">Mission Alignment Scores</h3>
+            <h3 className="font-serif-dm text-lg text-[#1A1A2E]">Mission Alignment Scores</h3>
             <Tag variant="mus">Cultural Infusion verified</Tag>
           </div>
           <div className="grid grid-cols-5 gap-4">
             {scores.map(s => (
-              <div key={s.art} className="bg-[#252530] rounded-xl p-4 text-center border border-[rgba(255,255,255,0.04)]">
-                <div className="text-[11px] text-[#5C5870] mb-2">{s.art}</div>
-                <div className={`font-serif-dm text-[28px] ${s.score >= 88 ? 'text-[#7DFFC0]' : 'text-[#FCD34D]'}`}>{s.score}</div>
-                <div className="w-full h-1.5 rounded bg-[rgba(255,255,255,0.05)] mt-2">
-                  <div className={`h-full rounded transition-all ${s.score >= 88 ? 'bg-[#7DFFC0]' : 'bg-[#FCD34D]'}`} style={{ width: `${s.score}%` }} />
+              <div key={s.art} className="bg-[#F0F0F5] rounded-xl p-4 text-center border border-[rgba(0,0,0,0.04)]">
+                <div className="text-[11px] text-[#9494B0] mb-2">{s.art}</div>
+                <div className={`font-serif-dm text-[28px] ${s.score >= 88 ? 'text-[#10B981]' : 'text-[#D97706]'}`}>{s.score}</div>
+                <div className="w-full h-1.5 rounded bg-[rgba(0,0,0,0.06)] mt-2">
+                  <div className={`h-full rounded transition-all ${s.score >= 88 ? 'bg-[#10B981]' : 'bg-[#D97706]'}`} style={{ width: `${s.score}%` }} />
                 </div>
               </div>
             ))}
@@ -1203,10 +1203,10 @@ export default function ParadigmShift() {
 
   const MusGov = () => (
     <PortalLayout breadcrumb="Museum · Stakeholder Governance">
-      <h1 className="font-serif-dm text-[26px] text-[#F0EDE8] mb-1">Stakeholder Governance</h1>
-      <p className="text-sm text-[#A8A4B8] mb-6">Curatorial authority remains with MoMA at all times</p>
+      <h1 className="font-serif-dm text-[26px] text-[#1A1A2E] mb-1">Stakeholder Governance</h1>
+      <p className="text-sm text-[#6B6B8A] mb-6">Curatorial authority remains with MoMA at all times</p>
 
-      <div className="bg-[rgba(125,255,192,0.06)] border border-[rgba(125,255,192,0.12)] rounded-xl p-4 text-sm text-[#7DFFC0] mb-6">
+      <div className="bg-[rgba(16,185,129,0.06)] border border-[rgba(16,185,129,0.1)] rounded-xl p-4 text-sm text-[#10B981] mb-6">
         Museum retains full curatorial control · All overrides are published on-chain to token holders
       </div>
 
@@ -1214,8 +1214,8 @@ export default function ParadigmShift() {
         <div className="space-y-4">
           {musProposals.map(p => (
             <Card key={p.id}>
-              <h4 className="font-serif-dm text-base text-[#F0EDE8] mb-1">{p.title}</h4>
-              <div className="text-xs text-[#5C5870] mb-3">Stakeholder consensus: {p.forPct}% For · {100 - p.forPct}% Against/Abstain</div>
+              <h4 className="font-serif-dm text-base text-[#1A1A2E] mb-1">{p.title}</h4>
+              <div className="text-xs text-[#9494B0] mb-3">Stakeholder consensus: {p.forPct}% For · {100 - p.forPct}% Against/Abstain</div>
               <VoteBar forPct={p.forPct} againstPct={100 - p.forPct} abstainPct={0} />
               {!p.decision ? (
                 <div className="flex gap-2 mt-4">
@@ -1225,9 +1225,9 @@ export default function ParadigmShift() {
                 </div>
               ) : (
                 <div className={`rounded-lg p-3 mt-4 text-sm screen-enter ${
-                  p.decision === 'follow' ? 'bg-[rgba(110,231,183,0.08)] text-[#6EE7B7] border border-[rgba(110,231,183,0.15)]' :
-                  p.decision === 'override' ? 'bg-[rgba(252,211,77,0.08)] text-[#FCD34D] border border-[rgba(252,211,77,0.15)]' :
-                  'bg-[rgba(255,255,255,0.04)] text-[#A8A4B8] border border-[rgba(255,255,255,0.06)]'
+                  p.decision === 'follow' ? 'bg-[rgba(5,150,105,0.08)] text-[#059669] border border-[rgba(5,150,105,0.12)]' :
+                  p.decision === 'override' ? 'bg-[rgba(217,119,6,0.08)] text-[#D97706] border border-[rgba(217,119,6,0.12)]' :
+                  'bg-[rgba(0,0,0,0.04)] text-[#6B6B8A] border border-[rgba(0,0,0,0.08)]'
                 }`}>
                   {p.decision === 'follow' && '✓ Decision recorded: Loan approved. Tate Modern notified. Published on-chain.'}
                   {p.decision === 'override' && '⚠ Override recorded. Submit written rationale — published to all token holders within 24 hours.'}
@@ -1239,7 +1239,7 @@ export default function ParadigmShift() {
         </div>
         <div className="space-y-4">
           <Card>
-            <div className="text-[11px] uppercase tracking-[0.08em] text-[#5C5870] mb-4 font-semibold">Governance Activity</div>
+            <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-4 font-semibold">Governance Activity</div>
             <div className="grid grid-cols-2 gap-3">
               <MetricTile label="Total" value="24" />
               <MetricTile label="Followed" value="18" />
@@ -1266,33 +1266,33 @@ export default function ParadigmShift() {
 
     return (
       <ModalWrap>
-        <h3 className="font-serif-dm text-[22px] text-[#F0EDE8]">{mode === 'buy' ? 'Buy' : 'Sell'} shares</h3>
-        <p className="text-[12px] text-[#5C5870] mb-5">{artwork?.title} · ${price}/share</p>
+        <h3 className="font-serif-dm text-[22px] text-[#1A1A2E]">{mode === 'buy' ? 'Buy' : 'Sell'} shares</h3>
+        <p className="text-[12px] text-[#9494B0] mb-5">{artwork?.title} · ${price}/share</p>
 
         <div className="flex items-center gap-4 mb-5">
-          <button className="w-8 h-8 rounded-lg bg-[#252530] text-[#F0EDE8] border border-[rgba(255,255,255,0.06)] flex items-center justify-center hover:bg-[#2E2E3A]"
+          <button className="w-8 h-8 rounded-lg bg-[#F0F0F5] text-[#1A1A2E] border border-[rgba(0,0,0,0.08)] flex items-center justify-center hover:bg-[#E5E5EC]"
             onClick={() => setTradeQty(Math.max(1, tradeQty - 1))}>−</button>
-          <span className="font-mono-dm text-2xl font-bold text-[#F0EDE8] w-12 text-center">{tradeQty}</span>
-          <button className="w-8 h-8 rounded-lg bg-[#252530] text-[#F0EDE8] border border-[rgba(255,255,255,0.06)] flex items-center justify-center hover:bg-[#2E2E3A]"
+          <span className="font-mono-dm text-2xl font-bold text-[#1A1A2E] w-12 text-center">{tradeQty}</span>
+          <button className="w-8 h-8 rounded-lg bg-[#F0F0F5] text-[#1A1A2E] border border-[rgba(0,0,0,0.08)] flex items-center justify-center hover:bg-[#E5E5EC]"
             onClick={() => setTradeQty(Math.min(maxQty, tradeQty + 1))}>+</button>
         </div>
 
-        <div className="border-t border-[rgba(255,255,255,0.06)] pt-4 space-y-2">
-          <div className="flex justify-between text-sm"><span className="text-[#A8A4B8]">Subtotal</span><span className="font-mono-dm text-[#F0EDE8]">${sub.toLocaleString()}</span></div>
-          <div className="flex justify-between text-sm"><span className="text-[#A8A4B8]">Fee (0.5%)</span><span className="font-mono-dm text-[#A8A4B8]">${fee.toFixed(2)}</span></div>
-          <div className="flex justify-between text-sm font-bold pt-2 border-t border-[rgba(255,255,255,0.06)]">
-            <span className="text-[#F0EDE8]">Total</span><span className="font-mono-dm text-[#F0EDE8]">${total.toFixed(2)}</span>
+        <div className="border-t border-[rgba(0,0,0,0.08)] pt-4 space-y-2">
+          <div className="flex justify-between text-sm"><span className="text-[#6B6B8A]">Subtotal</span><span className="font-mono-dm text-[#1A1A2E]">${sub.toLocaleString()}</span></div>
+          <div className="flex justify-between text-sm"><span className="text-[#6B6B8A]">Fee (0.5%)</span><span className="font-mono-dm text-[#6B6B8A]">${fee.toFixed(2)}</span></div>
+          <div className="flex justify-between text-sm font-bold pt-2 border-t border-[rgba(0,0,0,0.08)]">
+            <span className="text-[#1A1A2E]">Total</span><span className="font-mono-dm text-[#1A1A2E]">${total.toFixed(2)}</span>
           </div>
         </div>
 
         {mode === 'buy' && (
-          <div className="bg-[rgba(200,184,255,0.08)] rounded-lg p-3 mt-4 text-xs text-[#C8B8FF]">
+          <div className="bg-[rgba(124,92,252,0.08)] rounded-lg p-3 mt-4 text-xs text-[#7C5CFC]">
             You will receive {tradeQty * 10} PSG governance tokens with this purchase.
           </div>
         )}
 
         {orderConfirmed && (
-          <div className="bg-[rgba(110,231,183,0.1)] border border-[rgba(110,231,183,0.2)] rounded-lg p-3 mt-3 text-sm text-[#6EE7B7] screen-enter">
+          <div className="bg-[rgba(5,150,105,0.1)] border border-[rgba(5,150,105,0.15)] rounded-lg p-3 mt-3 text-sm text-[#059669] screen-enter">
             ✓ Order confirmed · Tokens allocated on settlement
           </div>
         )}
@@ -1317,42 +1317,42 @@ export default function ParadigmShift() {
 
     return (
       <ModalWrap width={420}>
-        <h3 className="font-serif-dm text-[22px] text-[#F0EDE8]">Trade PSG tokens</h3>
-        <p className="text-[12px] text-[#5C5870] mb-4">{art} · Current: ${tm.price.toFixed(2)} · Balance: {tm.bal}</p>
+        <h3 className="font-serif-dm text-[22px] text-[#1A1A2E]">Trade PSG tokens</h3>
+        <p className="text-[12px] text-[#9494B0] mb-4">{art} · Current: ${tm.price.toFixed(2)} · Balance: {tm.bal}</p>
 
-        <div className="flex bg-[#252530] rounded-lg p-0.5 mb-5">
+        <div className="flex bg-[#F0F0F5] rounded-lg p-0.5 mb-5">
           {['buy', 'sell'].map(t => (
             <button key={t} className={`flex-1 py-2 rounded-md text-sm font-medium capitalize transition-all ${
-              tokenTab === t ? 'bg-[rgba(200,184,255,0.12)] text-[#C8B8FF]' : 'text-[#5C5870]'
+              tokenTab === t ? 'bg-[rgba(124,92,252,0.1)] text-[#7C5CFC]' : 'text-[#9494B0]'
             }`} onClick={() => setTokenTab(t)}>{t} tokens</button>
           ))}
         </div>
 
-        <div className="text-xs text-[#5C5870] mb-2">{tokenTab === 'buy' ? 'Ask' : 'Bid'} price: <span className="font-mono-dm text-[#F0EDE8]">${tokenTab === 'buy' ? askPrice : bidPrice}</span></div>
+        <div className="text-xs text-[#9494B0] mb-2">{tokenTab === 'buy' ? 'Ask' : 'Bid'} price: <span className="font-mono-dm text-[#1A1A2E]">${tokenTab === 'buy' ? askPrice : bidPrice}</span></div>
 
         <div className="flex items-center gap-4 mb-5">
-          <button className="w-8 h-8 rounded-lg bg-[#252530] text-[#F0EDE8] border border-[rgba(255,255,255,0.06)] flex items-center justify-center hover:bg-[#2E2E3A]"
+          <button className="w-8 h-8 rounded-lg bg-[#F0F0F5] text-[#1A1A2E] border border-[rgba(0,0,0,0.08)] flex items-center justify-center hover:bg-[#E5E5EC]"
             onClick={() => setTokenQty(Math.max(10, tokenQty - 10))}>−</button>
-          <span className="font-mono-dm text-2xl font-bold text-[#F0EDE8] w-12 text-center">{tokenQty}</span>
-          <button className="w-8 h-8 rounded-lg bg-[#252530] text-[#F0EDE8] border border-[rgba(255,255,255,0.06)] flex items-center justify-center hover:bg-[#2E2E3A]"
+          <span className="font-mono-dm text-2xl font-bold text-[#1A1A2E] w-12 text-center">{tokenQty}</span>
+          <button className="w-8 h-8 rounded-lg bg-[#F0F0F5] text-[#1A1A2E] border border-[rgba(0,0,0,0.08)] flex items-center justify-center hover:bg-[#E5E5EC]"
             onClick={() => setTokenQty(Math.min(tokenTab === 'sell' ? tm.bal : 500, tokenQty + 10))}>+</button>
         </div>
 
-        <div className="border-t border-[rgba(255,255,255,0.06)] pt-4 space-y-2">
-          <div className="flex justify-between text-sm"><span className="text-[#A8A4B8]">Subtotal</span><span className="font-mono-dm text-[#F0EDE8]">${sub.toFixed(2)}</span></div>
-          <div className="flex justify-between text-sm"><span className="text-[#A8A4B8]">Fee (0.5%)</span><span className="font-mono-dm text-[#A8A4B8]">${fee.toFixed(2)}</span></div>
-          <div className="flex justify-between text-sm font-bold pt-2 border-t border-[rgba(255,255,255,0.06)]">
-            <span className="text-[#F0EDE8]">{tokenTab === 'buy' ? 'Total' : 'You receive'}</span>
-            <span className="font-mono-dm text-[#F0EDE8]">${(tokenTab === 'buy' ? sub + fee : sub - fee).toFixed(2)}</span>
+        <div className="border-t border-[rgba(0,0,0,0.08)] pt-4 space-y-2">
+          <div className="flex justify-between text-sm"><span className="text-[#6B6B8A]">Subtotal</span><span className="font-mono-dm text-[#1A1A2E]">${sub.toFixed(2)}</span></div>
+          <div className="flex justify-between text-sm"><span className="text-[#6B6B8A]">Fee (0.5%)</span><span className="font-mono-dm text-[#6B6B8A]">${fee.toFixed(2)}</span></div>
+          <div className="flex justify-between text-sm font-bold pt-2 border-t border-[rgba(0,0,0,0.08)]">
+            <span className="text-[#1A1A2E]">{tokenTab === 'buy' ? 'Total' : 'You receive'}</span>
+            <span className="font-mono-dm text-[#1A1A2E]">${(tokenTab === 'buy' ? sub + fee : sub - fee).toFixed(2)}</span>
           </div>
         </div>
 
-        <div className={`rounded-lg p-3 mt-4 text-xs ${tokenTab === 'buy' ? 'bg-[rgba(200,184,255,0.08)] text-[#C8B8FF]' : 'bg-[rgba(252,211,77,0.08)] text-[#FCD34D]'}`}>
+        <div className={`rounded-lg p-3 mt-4 text-xs ${tokenTab === 'buy' ? 'bg-[rgba(124,92,252,0.08)] text-[#7C5CFC]' : 'bg-[rgba(217,119,6,0.08)] text-[#D97706]'}`}>
           {tokenTab === 'buy' ? "Buying tokens increases your voting weight on this artwork's proposals." : "Selling tokens reduces your voting weight. Rights transfer to buyer immediately."}
         </div>
 
         {orderConfirmed && (
-          <div className="bg-[rgba(110,231,183,0.1)] border border-[rgba(110,231,183,0.2)] rounded-lg p-3 mt-3 text-sm text-[#6EE7B7] screen-enter">
+          <div className="bg-[rgba(5,150,105,0.1)] border border-[rgba(5,150,105,0.15)] rounded-lg p-3 mt-3 text-sm text-[#059669] screen-enter">
             ✓ Order placed · Settlement within 1 business day
           </div>
         )}
@@ -1369,30 +1369,30 @@ export default function ParadigmShift() {
     if (modal !== 'new-proposal') return null;
     return (
       <ModalWrap width={460}>
-        <h3 className="font-serif-dm text-[22px] text-[#F0EDE8] mb-5">Create Stakeholder Proposal</h3>
+        <h3 className="font-serif-dm text-[22px] text-[#1A1A2E] mb-5">Create Stakeholder Proposal</h3>
         <div className="space-y-4">
           <div>
-            <label className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#5C5870] block mb-2">Title</label>
-            <input className="w-full bg-[#252530] border border-[rgba(255,255,255,0.06)] rounded-lg px-3.5 py-2.5 text-sm text-[#F0EDE8] focus:outline-none focus:border-[#7DFFC0]"
+            <label className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#9494B0] block mb-2">Title</label>
+            <input className="w-full bg-[#F0F0F5] border border-[rgba(0,0,0,0.08)] rounded-lg px-3.5 py-2.5 text-sm text-[#1A1A2E] focus:outline-none focus:border-[#10B981]"
               value={npTitle} onChange={e => setNpTitle(e.target.value)} placeholder="Proposal title..." />
           </div>
           <div>
-            <label className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#5C5870] block mb-2">Description</label>
-            <textarea className="w-full bg-[#252530] border border-[rgba(255,255,255,0.06)] rounded-lg px-3.5 py-2.5 text-sm text-[#F0EDE8] focus:outline-none focus:border-[#7DFFC0] resize-none"
+            <label className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#9494B0] block mb-2">Description</label>
+            <textarea className="w-full bg-[#F0F0F5] border border-[rgba(0,0,0,0.08)] rounded-lg px-3.5 py-2.5 text-sm text-[#1A1A2E] focus:outline-none focus:border-[#10B981] resize-none"
               rows={3} value={npDesc} onChange={e => setNpDesc(e.target.value)} placeholder="Describe the proposal..." />
           </div>
           <div>
-            <label className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#5C5870] block mb-2">Artwork</label>
-            <select className="w-full bg-[#252530] border border-[rgba(255,255,255,0.06)] rounded-lg px-3.5 py-2.5 text-sm text-[#F0EDE8] focus:outline-none"
+            <label className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#9494B0] block mb-2">Artwork</label>
+            <select className="w-full bg-[#F0F0F5] border border-[rgba(0,0,0,0.08)] rounded-lg px-3.5 py-2.5 text-sm text-[#1A1A2E] focus:outline-none"
               value={npArt} onChange={e => setNpArt(e.target.value)}>
               {ARTWORKS.map(a => <option key={a.id} value={a.title}>{a.title}</option>)}
             </select>
           </div>
           <div>
-            <label className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#5C5870] block mb-2">Voting Window</label>
-            <div className="flex bg-[#252530] rounded-lg p-0.5">
+            <label className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#9494B0] block mb-2">Voting Window</label>
+            <div className="flex bg-[#F0F0F5] rounded-lg p-0.5">
               {['7 days', '14 days', '30 days'].map(w => (
-                <button key={w} className={`flex-1 py-2 rounded-md text-sm font-medium transition-all ${npWindow === w ? 'bg-[rgba(125,255,192,0.12)] text-[#7DFFC0]' : 'text-[#5C5870]'}`}
+                <button key={w} className={`flex-1 py-2 rounded-md text-sm font-medium transition-all ${npWindow === w ? 'bg-[rgba(16,185,129,0.1)] text-[#10B981]' : 'text-[#9494B0]'}`}
                   onClick={() => setNpWindow(w)}>{w}</button>
               ))}
             </div>
@@ -1400,7 +1400,7 @@ export default function ParadigmShift() {
         </div>
 
         {orderConfirmed && (
-          <div className="bg-[rgba(110,231,183,0.1)] border border-[rgba(110,231,183,0.2)] rounded-lg p-3 mt-4 text-sm text-[#6EE7B7] screen-enter">
+          <div className="bg-[rgba(5,150,105,0.1)] border border-[rgba(5,150,105,0.15)] rounded-lg p-3 mt-4 text-sm text-[#059669] screen-enter">
             ✓ Proposal published to all token holders
           </div>
         )}
@@ -1415,9 +1415,9 @@ export default function ParadigmShift() {
 
   const ModalWrap = ({ children, width = 400 }: { children: React.ReactNode; width?: number }) => (
     <div className="fixed inset-0 z-50 flex items-center justify-center" onClick={() => !orderConfirmed && setModal(null)}>
-      <div className="absolute inset-0 bg-[rgba(0,0,0,0.7)] backdrop-blur-sm" />
-      <div className="relative modal-enter bg-[#1C1C22] border border-[rgba(255,255,255,0.08)] rounded-2xl p-6"
-        style={{ width, maxWidth: '90vw', boxShadow: '0 24px 80px rgba(0,0,0,0.6)' }}
+      <div className="absolute inset-0 bg-[rgba(0,0,0,0.3)] backdrop-blur-sm" />
+      <div className="relative modal-enter bg-[#FFFFFF] border border-[rgba(0,0,0,0.08)] rounded-2xl p-6"
+        style={{ width, maxWidth: '90vw', boxShadow: '0 24px 80px rgba(0,0,0,0.15)' }}
         onClick={e => e.stopPropagation()}>
         {children}
       </div>
@@ -1446,7 +1446,7 @@ export default function ParadigmShift() {
   };
 
   return (
-    <div className="noise-bg min-h-screen bg-[#0C0C10]">
+    <div className="noise-bg min-h-screen bg-[#F8F8FC]">
       {renderScreen()}
       <TradeModal />
       <TokenTradeModal />
