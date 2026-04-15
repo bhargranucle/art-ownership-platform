@@ -8,8 +8,8 @@ import {
 } from '@/data/paradigm-data';
 
 type Screen = 'role-select' | 'inv-login' | 'inv-dash' | 'inv-holdings' | 'artwork-detail' |
-  'marketplace' | 'mkt-detail' | 'inv-gov' | 'token-market' |
-  'mus-login' | 'mus-dash' | 'mus-engagement' | 'mus-gov';
+  'marketplace' | 'mkt-detail' | 'inv-gov' | 'token-market' | 'inv-chain' |
+  'mus-login' | 'mus-dash' | 'mus-engagement' | 'mus-gov' | 'mus-chain';
 
 type Modal = null | 'trade' | 'token' | 'new-proposal';
 
@@ -146,6 +146,7 @@ export default function ParadigmShift() {
       { id: 'marketplace', label: 'Marketplace', icon: '◎' },
       { id: 'inv-gov', label: 'Governance', icon: '◬', badge: proposals.filter(p => !p.voted).length },
       { id: 'token-market', label: 'Token Market', icon: '◉' },
+      { id: 'inv-chain', label: 'Chain Infrastructure', icon: '⬡' },
     ];
     return (
       <div className="w-[220px] min-h-screen bg-[#FFFFFF] border-r border-[rgba(0,0,0,0.08)] flex flex-col">
@@ -184,6 +185,7 @@ export default function ParadigmShift() {
       { id: 'mus-dash', label: 'Overview', icon: '◈' },
       { id: 'mus-engagement', label: 'Engagement & Impact', icon: '◎' },
       { id: 'mus-gov', label: 'Stakeholder Governance', icon: '◬' },
+      { id: 'mus-chain', label: 'Chain Infrastructure', icon: '⬡' },
     ];
     return (
       <div className="w-[220px] min-h-screen bg-[#FFFFFF] border-r border-[rgba(0,0,0,0.08)] flex flex-col">
@@ -1253,7 +1255,354 @@ export default function ParadigmShift() {
     </PortalLayout>
   );
 
-  // ─── Modals ──────────────────────────────
+  // ─── Blockchain Infrastructure (Investor) ──
+  const InvChain = () => {
+    const [selectedChain, setSelectedChain] = useState('solana');
+    const chains = [
+      { id: 'solana', name: 'Solana', color: '#9945FF', role: 'High-Speed Trading', tps: '65,000', cost: '$0.00025', latency: '400ms', status: 'Active', desc: 'Primary chain for secondary market trading, revenue distributions, and high-frequency PSG token transfers.' },
+      { id: 'avalanche', name: 'Avalanche', color: '#E84142', role: 'Private Governance', tps: '4,500', cost: '$0.01', latency: '2s', status: 'Active', desc: 'Institutional subnet for private governance operations, compliance validation, and museum-specific tokenomics.' },
+      { id: 'ethereum', name: 'Ethereum', color: '#627EEA', role: 'Settlement & Security', tps: '30', cost: '$2.50', latency: '12s', status: 'Active', desc: 'Final settlement layer for high-value transactions, cross-chain bridges, and maximum market acceptance.' },
+    ];
+    const txRouting = [
+      { type: 'Share Trading', chain: 'Solana', reason: 'Lowest cost, highest throughput', icon: '⚡' },
+      { type: 'Advisory Voting', chain: 'Avalanche', reason: 'Private subnet, institutional rules', icon: '🔒' },
+      { type: 'Token Transfers', chain: 'Solana', reason: 'Sub-second finality, minimal fees', icon: '↔' },
+      { type: 'High-Value Settlement', chain: 'Ethereum', reason: 'Maximum security & liquidity', icon: '🏦' },
+      { type: 'Cross-Chain Bridge', chain: 'Ethereum ↔ Solana', reason: 'Liquidity access', icon: '🌉' },
+      { type: 'Compliance Attestation', chain: 'Avalanche', reason: 'Jurisdiction-aware contracts', icon: '✓' },
+    ];
+    const recentTx = [
+      { action: 'Buy 3 shares · Rothko', chain: 'Solana', cost: '$0.00075', time: '0.4s', status: 'Confirmed' },
+      { action: 'Vote · Loan Proposal', chain: 'Avalanche', cost: '$0.01', time: '1.8s', status: 'Confirmed' },
+      { action: 'Bridge 50 PSG → ETH', chain: 'Ethereum', cost: '$2.48', time: '12s', status: 'Pending' },
+    ];
+    const active = chains.find(c => c.id === selectedChain)!;
+
+    return (
+      <PortalLayout breadcrumb="Investor · Chain Infrastructure">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h1 className="font-serif-dm text-[26px] text-[#1A1A2E]">Chain Infrastructure</h1>
+            <p className="text-sm text-[#6B6B8A] mt-1">Multi-chain architecture · Dynamic routing · Cost optimized</p>
+          </div>
+          <Tag variant="inv">3 chains active</Tag>
+        </div>
+
+        <div className="bg-[rgba(124,92,252,0.06)] border border-[rgba(124,92,252,0.1)] rounded-xl p-4 text-sm text-[#7C5CFC] mb-6">
+          Transactions are automatically routed to the optimal blockchain based on cost, speed, privacy, and compliance requirements.
+        </div>
+
+        {/* Chain selector cards */}
+        <div className="grid grid-cols-3 gap-4 mb-8">
+          {chains.map(c => (
+            <div key={c.id}
+              className={`bg-[#FFFFFF] border rounded-2xl p-5 cursor-pointer transition-all duration-300 hover:-translate-y-1 ${selectedChain === c.id ? 'border-[rgba(124,92,252,0.3)] shadow-[0_0_30px_rgba(124,92,252,0.1)]' : 'border-[rgba(0,0,0,0.08)]'}`}
+              style={{ boxShadow: selectedChain === c.id ? undefined : '0 1px 3px rgba(0,0,0,0.08)' }}
+              onClick={() => setSelectedChain(c.id)}>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-3 h-3 rounded-full" style={{ background: c.color }} />
+                <span className="font-serif-dm text-lg text-[#1A1A2E]">{c.name}</span>
+                <Tag variant="success">{c.status}</Tag>
+              </div>
+              <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-2">{c.role}</div>
+              <div className="grid grid-cols-3 gap-2 mt-3">
+                <div><div className="text-[10px] text-[#9494B0]">TPS</div><div className="font-mono-dm text-sm text-[#1A1A2E]">{c.tps}</div></div>
+                <div><div className="text-[10px] text-[#9494B0]">Avg Cost</div><div className="font-mono-dm text-sm text-[#1A1A2E]">{c.cost}</div></div>
+                <div><div className="text-[10px] text-[#9494B0]">Latency</div><div className="font-mono-dm text-sm text-[#1A1A2E]">{c.latency}</div></div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-[2fr_1fr] gap-6 mb-8">
+          {/* Chain detail */}
+          <Card>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-4 h-4 rounded-full" style={{ background: active.color }} />
+              <h3 className="font-serif-dm text-lg text-[#1A1A2E]">{active.name} — {active.role}</h3>
+            </div>
+            <p className="text-sm text-[#6B6B8A] mb-5">{active.desc}</p>
+
+            <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-3 font-semibold">Smart Contracts Deployed</div>
+            <div className="space-y-2">
+              {(selectedChain === 'solana' ? [
+                { name: 'ShareTrading.sol', status: 'Live', desc: 'Fractional share order matching & settlement' },
+                { name: 'RevenueDistributor.sol', status: 'Live', desc: 'Automated revenue splits to shareholders' },
+                { name: 'PSGTokenTransfer.sol', status: 'Live', desc: 'High-speed governance token transfers' },
+              ] : selectedChain === 'avalanche' ? [
+                { name: 'MuseumGovernance.sol', status: 'Live', desc: 'Advisory voting with institutional override' },
+                { name: 'ComplianceEngine.sol', status: 'Live', desc: 'Jurisdiction-aware regulatory validation' },
+                { name: 'ArtworkRegistry.sol', status: 'Live', desc: 'Primary tokenization & provenance ledger' },
+              ] : [
+                { name: 'SettlementBridge.sol', status: 'Live', desc: 'Cross-chain settlement finalization' },
+                { name: 'LiquidityPool.sol', status: 'Live', desc: 'ETH/SOL liquidity bridge for PSG tokens' },
+                { name: 'OwnershipAttestation.sol', status: 'Live', desc: 'Immutable ownership verification layer' },
+              ]).map(sc => (
+                <div key={sc.name} className="flex items-center justify-between bg-[#F0F0F5] rounded-lg p-3 border border-[rgba(0,0,0,0.04)]">
+                  <div>
+                    <div className="font-mono-dm text-sm text-[#1A1A2E]">{sc.name}</div>
+                    <div className="text-[11px] text-[#9494B0]">{sc.desc}</div>
+                  </div>
+                  <Tag variant="success">{sc.status}</Tag>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          {/* Optimization engine */}
+          <div className="space-y-4">
+            <Card>
+              <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-4 font-semibold">Optimization Engine</div>
+              <div className="space-y-3">
+                {[
+                  { label: 'Cost Savings vs Single-Chain', value: '94%', desc: 'vs Ethereum-only' },
+                  { label: 'Avg TX Latency', value: '0.8s', desc: 'weighted across chains' },
+                  { label: 'Privacy Score', value: '9.2/10', desc: 'Avalanche subnet isolation' },
+                  { label: 'Compliance Coverage', value: '7/7', desc: 'All jurisdictions active' },
+                ].map(m => (
+                  <div key={m.label} className="bg-[#F0F0F5] rounded-lg p-3 border border-[rgba(0,0,0,0.04)]">
+                    <div className="text-[10px] text-[#9494B0]">{m.label}</div>
+                    <div className="font-serif-dm text-xl text-[#1A1A2E]">{m.value}</div>
+                    <div className="text-[10px] text-[#9494B0]">{m.desc}</div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </div>
+        </div>
+
+        {/* Transaction routing table */}
+        <Card hover={false} className="mb-8">
+          <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Dynamic Chain Routing</h3>
+          <table className="w-full">
+            <thead>
+              <tr className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] border-b border-[rgba(0,0,0,0.08)]">
+                {['', 'Transaction Type', 'Routed To', 'Routing Reason'].map(h => (
+                  <th key={h} className="text-left pb-3 font-semibold">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {txRouting.map((r, i) => (
+                <tr key={i} className="border-b border-[rgba(0,0,0,0.04)] hover:bg-[#F0F0F5] transition-colors">
+                  <td className="py-3 text-base">{r.icon}</td>
+                  <td className="py-3 text-sm text-[#1A1A2E] font-medium">{r.type}</td>
+                  <td className="py-3"><Tag variant="inv">{r.chain}</Tag></td>
+                  <td className="py-3 text-sm text-[#6B6B8A]">{r.reason}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Card>
+
+        {/* Recent transactions */}
+        <Card hover={false}>
+          <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Recent On-Chain Activity</h3>
+          <table className="w-full">
+            <thead>
+              <tr className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] border-b border-[rgba(0,0,0,0.08)]">
+                {['Action', 'Chain', 'Gas Cost', 'Latency', 'Status'].map(h => (
+                  <th key={h} className={`pb-3 font-semibold ${h === 'Action' ? 'text-left' : 'text-right'}`}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {recentTx.map((tx, i) => (
+                <tr key={i} className="border-b border-[rgba(0,0,0,0.04)]">
+                  <td className="py-3 text-sm text-[#1A1A2E]">{tx.action}</td>
+                  <td className="text-right"><Tag variant="inv">{tx.chain}</Tag></td>
+                  <td className="text-right font-mono-dm text-sm text-[#6B6B8A]">{tx.cost}</td>
+                  <td className="text-right font-mono-dm text-sm text-[#6B6B8A]">{tx.time}</td>
+                  <td className="text-right"><Tag variant={tx.status === 'Confirmed' ? 'success' : 'warning'}>{tx.status}</Tag></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Card>
+      </PortalLayout>
+    );
+  };
+
+  // ─── Blockchain Infrastructure (Museum) ──
+  const MusChain = () => {
+    const [selectedChain, setSelectedChain] = useState('avalanche');
+    const chains = [
+      { id: 'avalanche', name: 'Avalanche Subnet', color: '#E84142', role: 'Institutional Governance', status: 'Primary' },
+      { id: 'solana', name: 'Solana', color: '#9945FF', role: 'Public Trading Layer', status: 'Active' },
+      { id: 'ethereum', name: 'Ethereum', color: '#627EEA', role: 'Settlement Bridge', status: 'Active' },
+    ];
+    const subnetConfig = [
+      { label: 'Subnet ID', value: 'moma-ps-subnet-001' },
+      { label: 'Validators', value: '12 institutional nodes' },
+      { label: 'Consensus', value: 'Snowman (PoS)' },
+      { label: 'Block Time', value: '2s' },
+      { label: 'Privacy Level', value: 'Permissioned' },
+      { label: 'Compliance', value: '7/7 frameworks active' },
+    ];
+    const contractOps = [
+      { contract: 'MuseumStewardship', op: 'Override decision published', chain: 'Avalanche', time: '2m ago', status: 'Confirmed' },
+      { contract: 'ArtworkRegistry', op: 'Rothko attestation synced', chain: 'Solana', time: '5m ago', status: 'Confirmed' },
+      { contract: 'ComplianceEngine', op: 'SEC/ESMA validation', chain: 'Avalanche', time: '12m ago', status: 'Confirmed' },
+      { contract: 'RevenueSplit', op: 'Q1 distribution · $41K', chain: 'Solana', time: '1d ago', status: 'Settled' },
+      { contract: 'OwnershipBridge', op: 'Cross-chain sync', chain: 'Ethereum', time: '1d ago', status: 'Confirmed' },
+    ];
+
+    return (
+      <PortalLayout breadcrumb="Museum · Chain Infrastructure">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h1 className="font-serif-dm text-[26px] text-[#1A1A2E]">Chain Infrastructure</h1>
+            <p className="text-sm text-[#6B6B8A] mt-1">Institutional-grade multi-chain architecture · Curatorial control preserved on-chain</p>
+          </div>
+          <Btn portal="mus" onClick={() => {}}>Deploy New Contract</Btn>
+        </div>
+
+        <div className="bg-[rgba(16,185,129,0.06)] border border-[rgba(16,185,129,0.1)] rounded-xl p-4 text-sm text-[#10B981] mb-6">
+          MoMA operates a dedicated Avalanche Subnet for private governance. Public trading runs on Solana. Ethereum provides settlement finality and cross-chain liquidity.
+        </div>
+
+        {/* KPI row */}
+        <div className="grid grid-cols-4 gap-4 mb-8">
+          <MetricTile label="Active Chains" value="3" sub="Avalanche · Solana · Ethereum" />
+          <MetricTile label="Smart Contracts" value="9" sub="across 3 chains" />
+          <MetricTile label="Monthly Gas Saved" value="$12.4K" sub={<Tag variant="success">vs ETH-only: 94% savings</Tag>} />
+          <MetricTile label="On-Chain Decisions" value="24" sub="all published & auditable" />
+        </div>
+
+        {/* Chain tabs */}
+        <div className="flex gap-2 mb-6">
+          {chains.map(c => (
+            <button key={c.id}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${selectedChain === c.id ? 'bg-[rgba(16,185,129,0.1)] text-[#10B981]' : 'bg-[#F0F0F5] text-[#9494B0] hover:text-[#6B6B8A]'}`}
+              onClick={() => setSelectedChain(c.id)}>
+              <span className="w-2 h-2 rounded-full" style={{ background: c.color }} />
+              {c.name}
+              <Tag variant={selectedChain === c.id ? 'mus' : 'muted'}>{c.status}</Tag>
+            </button>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-[2fr_1fr] gap-6 mb-8">
+          <div className="space-y-6">
+            {/* Architecture diagram card */}
+            <Card>
+              <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Hybrid Architecture</h3>
+              {/* Visual architecture */}
+              <div className="relative bg-[#F0F0F5] rounded-xl p-6 border border-[rgba(0,0,0,0.04)]">
+                <div className="grid grid-cols-3 gap-4">
+                  {/* Private layer */}
+                  <div className="col-span-1 bg-[#FFFFFF] rounded-xl p-4 border-2 border-[#E84142] border-opacity-30">
+                    <div className="text-[10px] uppercase tracking-[0.08em] text-[#E84142] font-semibold mb-2">Private Layer</div>
+                    <div className="font-serif-dm text-sm text-[#1A1A2E] mb-2">Avalanche Subnet</div>
+                    <div className="space-y-1.5">
+                      {['Governance', 'Compliance', 'Registry'].map(s => (
+                        <div key={s} className="bg-[#F0F0F5] rounded px-2 py-1 text-[10px] text-[#6B6B8A]">
+                          <span className="text-[#E84142]">●</span> {s}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  {/* Bridge */}
+                  <div className="col-span-1 flex flex-col items-center justify-center">
+                    <div className="text-[10px] uppercase tracking-[0.08em] text-[#9494B0] mb-2">Cross-Chain Bridge</div>
+                    <div className="w-full flex items-center gap-1">
+                      <div className="flex-1 h-px bg-[#E84142] opacity-40" />
+                      <div className="text-xs text-[#9494B0]">⬌</div>
+                      <div className="flex-1 h-px bg-[#9945FF] opacity-40" />
+                    </div>
+                    <div className="w-full flex items-center gap-1 mt-2">
+                      <div className="flex-1 h-px bg-[#9945FF] opacity-40" />
+                      <div className="text-xs text-[#9494B0]">⬌</div>
+                      <div className="flex-1 h-px bg-[#627EEA] opacity-40" />
+                    </div>
+                    <div className="mt-3 bg-[#FFFFFF] rounded-lg px-3 py-2 border border-[rgba(0,0,0,0.08)] text-center">
+                      <div className="font-mono-dm text-xs text-[#1A1A2E]">Router</div>
+                      <div className="text-[9px] text-[#9494B0]">Auto-selects optimal chain</div>
+                    </div>
+                  </div>
+                  {/* Public layer */}
+                  <div className="col-span-1 space-y-3">
+                    <div className="bg-[#FFFFFF] rounded-xl p-4 border-2 border-[#9945FF] border-opacity-30">
+                      <div className="text-[10px] uppercase tracking-[0.08em] text-[#9945FF] font-semibold mb-1">Public Trading</div>
+                      <div className="font-serif-dm text-sm text-[#1A1A2E] mb-1">Solana</div>
+                      <div className="text-[10px] text-[#6B6B8A]">Shares · Tokens · Revenue</div>
+                    </div>
+                    <div className="bg-[#FFFFFF] rounded-xl p-4 border-2 border-[#627EEA] border-opacity-30">
+                      <div className="text-[10px] uppercase tracking-[0.08em] text-[#627EEA] font-semibold mb-1">Settlement</div>
+                      <div className="font-serif-dm text-sm text-[#1A1A2E] mb-1">Ethereum</div>
+                      <div className="text-[10px] text-[#6B6B8A]">Bridge · Liquidity · Finality</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            {/* Contract operations */}
+            <Card hover={false}>
+              <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Recent Contract Operations</h3>
+              <table className="w-full">
+                <thead>
+                  <tr className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] border-b border-[rgba(0,0,0,0.08)]">
+                    {['Contract', 'Operation', 'Chain', 'Time', 'Status'].map(h => (
+                      <th key={h} className={`pb-3 font-semibold ${h === 'Contract' || h === 'Operation' ? 'text-left' : 'text-right'}`}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {contractOps.map((op, i) => (
+                    <tr key={i} className="border-b border-[rgba(0,0,0,0.04)] hover:bg-[#F0F0F5] transition-colors">
+                      <td className="py-3 font-mono-dm text-sm text-[#1A1A2E]">{op.contract}</td>
+                      <td className="py-3 text-sm text-[#6B6B8A]">{op.op}</td>
+                      <td className="text-right"><Tag variant="mus">{op.chain}</Tag></td>
+                      <td className="text-right text-xs text-[#9494B0]">{op.time}</td>
+                      <td className="text-right"><Tag variant="success">{op.status}</Tag></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Card>
+          </div>
+
+          {/* Right sidebar */}
+          <div className="space-y-4">
+            <Card>
+              <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-4 font-semibold">MoMA Subnet Config</div>
+              <div className="space-y-3">
+                {subnetConfig.map(s => (
+                  <div key={s.label} className="flex justify-between text-sm">
+                    <span className="text-[#6B6B8A]">{s.label}</span>
+                    <span className="font-mono-dm text-[#1A1A2E] text-right">{s.value}</span>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            <Card>
+              <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-4 font-semibold">Multi-Chain Advantages</div>
+              <div className="space-y-3">
+                {[
+                  { icon: '⚡', title: 'Lower Costs', desc: '94% savings via Solana routing' },
+                  { icon: '🔒', title: 'Better Privacy', desc: 'Avalanche subnet isolation' },
+                  { icon: '🌐', title: 'Broader Liquidity', desc: 'Ethereum bridge access' },
+                  { icon: '🔄', title: 'Future-Proof', desc: 'Extensible to new chains' },
+                ].map(a => (
+                  <div key={a.title} className="flex gap-3 items-start">
+                    <span className="text-base">{a.icon}</span>
+                    <div>
+                      <div className="text-sm text-[#1A1A2E] font-medium">{a.title}</div>
+                      <div className="text-[11px] text-[#9494B0]">{a.desc}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            <CompliancePanel />
+          </div>
+        </div>
+      </PortalLayout>
+    );
+  };
 
   const TradeModal = () => {
     if (modal !== 'trade') return null;
@@ -1438,9 +1787,11 @@ export default function ParadigmShift() {
       case 'mkt-detail': return <MktDetail />;
       case 'inv-gov': return <InvGov />;
       case 'token-market': return <TokenMarket />;
+      case 'inv-chain': return <InvChain />;
       case 'mus-dash': return <MusDash />;
       case 'mus-engagement': return <MusEngagement />;
       case 'mus-gov': return <MusGov />;
+      case 'mus-chain': return <MusChain />;
       default: return <RoleSelect />;
     }
   };
