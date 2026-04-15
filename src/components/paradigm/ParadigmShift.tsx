@@ -1787,9 +1787,11 @@ export default function ParadigmShift() {
       case 'mkt-detail': return <MktDetail />;
       case 'inv-gov': return <InvGov />;
       case 'token-market': return <TokenMarket />;
+      case 'inv-chain': return <InvChain />;
       case 'mus-dash': return <MusDash />;
       case 'mus-engagement': return <MusEngagement />;
       case 'mus-gov': return <MusGov />;
+      case 'mus-chain': return <MusChain />;
       default: return <RoleSelect />;
     }
   };
