@@ -8,8 +8,8 @@ import {
 } from '@/data/paradigm-data';
 
 type Screen = 'role-select' | 'inv-login' | 'inv-dash' | 'inv-holdings' | 'artwork-detail' |
-  'marketplace' | 'mkt-detail' | 'inv-gov' | 'token-market' |
-  'mus-login' | 'mus-dash' | 'mus-engagement' | 'mus-gov';
+  'marketplace' | 'mkt-detail' | 'inv-gov' | 'token-market' | 'inv-chain' |
+  'mus-login' | 'mus-dash' | 'mus-engagement' | 'mus-gov' | 'mus-chain';
 
 type Modal = null | 'trade' | 'token' | 'new-proposal';
 
@@ -146,6 +146,7 @@ export default function ParadigmShift() {
       { id: 'marketplace', label: 'Marketplace', icon: '◎' },
       { id: 'inv-gov', label: 'Governance', icon: '◬', badge: proposals.filter(p => !p.voted).length },
       { id: 'token-market', label: 'Token Market', icon: '◉' },
+      { id: 'inv-chain', label: 'Chain Infrastructure', icon: '⬡' },
     ];
     return (
       <div className="w-[220px] min-h-screen bg-[#FFFFFF] border-r border-[rgba(0,0,0,0.08)] flex flex-col">
@@ -184,6 +185,7 @@ export default function ParadigmShift() {
       { id: 'mus-dash', label: 'Overview', icon: '◈' },
       { id: 'mus-engagement', label: 'Engagement & Impact', icon: '◎' },
       { id: 'mus-gov', label: 'Stakeholder Governance', icon: '◬' },
+      { id: 'mus-chain', label: 'Chain Infrastructure', icon: '⬡' },
     ];
     return (
       <div className="w-[220px] min-h-screen bg-[#FFFFFF] border-r border-[rgba(0,0,0,0.08)] flex flex-col">
