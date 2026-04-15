@@ -4,12 +4,16 @@ import { getArtworkSVG, getMarketArtSVG } from './ArtworkSVGs';
 import {
   ARTWORKS, PROPOSALS_INIT, TOKEN_MARKETS, MARKET_ITEMS,
   MUS_ARTWORKS, MUS_PROPOSALS_INIT, PORT_CHART, MUS_CHART,
-  TOKEN_CHART, BANKSY_PAIRS, COMPLIANCE_ITEMS
+  TOKEN_CHART, BANKSY_PAIRS, COMPLIANCE_ITEMS,
+  SECONDARY_MARKET_ITEMS, SPV_DETAILS, LEGAL_PROTECTIONS,
+  REGULATORY_REPORTS, APPROVAL_WORKFLOWS, STAFF_ROLES,
+  DONOR_RECORDS, SYSTEM_INTEGRATIONS, PROVENANCE_RECORDS,
+  CULTURAL_METRICS, SECURITY_CONTROLS
 } from '@/data/paradigm-data';
 
 type Screen = 'role-select' | 'inv-login' | 'inv-dash' | 'inv-holdings' | 'artwork-detail' |
-  'marketplace' | 'mkt-detail' | 'inv-gov' | 'token-market' | 'inv-chain' |
-  'mus-login' | 'mus-dash' | 'mus-engagement' | 'mus-gov' | 'mus-chain';
+  'marketplace' | 'mkt-detail' | 'inv-gov' | 'token-market' | 'inv-chain' | 'inv-secondary' | 'inv-analytics' |
+  'mus-login' | 'mus-dash' | 'mus-engagement' | 'mus-gov' | 'mus-chain' | 'mus-legal' | 'mus-management' | 'mus-security';
 
 type Modal = null | 'trade' | 'token' | 'new-proposal';
 
@@ -113,6 +117,9 @@ export default function ParadigmShift() {
   const [proposals, setProposals] = useState(PROPOSALS_INIT.map(p => ({ ...p })));
   const [musProposals, setMusProposals] = useState(MUS_PROPOSALS_INIT.map(p => ({ ...p })));
 
+  // Secondary market
+  const [showTrending, setShowTrending] = useState(true);
+
   const accent = portal === 'inv' ? '#7C5CFC' : '#10B981';
 
   const navigate = (s: Screen) => { setScreen(s); setOrderConfirmed(false); };
@@ -144,9 +151,11 @@ export default function ParadigmShift() {
       { id: 'inv-dash', label: 'Dashboard', icon: '◈' },
       { id: 'inv-holdings', label: 'My Holdings', icon: '◇' },
       { id: 'marketplace', label: 'Marketplace', icon: '◎' },
+      { id: 'inv-secondary', label: 'Secondary Market', icon: '◉' },
       { id: 'inv-gov', label: 'Governance', icon: '◬', badge: proposals.filter(p => !p.voted).length },
-      { id: 'token-market', label: 'Token Market', icon: '◉' },
-      { id: 'inv-chain', label: 'Chain Infrastructure', icon: '⬡' },
+      { id: 'token-market', label: 'Token Market', icon: '⬡' },
+      { id: 'inv-analytics', label: 'Analytics', icon: '◫' },
+      { id: 'inv-chain', label: 'Chain Infrastructure', icon: '⬢' },
     ];
     return (
       <div className="w-[220px] min-h-screen bg-[#FFFFFF] border-r border-[rgba(0,0,0,0.08)] flex flex-col">
@@ -183,8 +192,11 @@ export default function ParadigmShift() {
   const MusSidebar = () => {
     const items = [
       { id: 'mus-dash', label: 'Overview', icon: '◈' },
+      { id: 'mus-management', label: 'Management', icon: '◇' },
+      { id: 'mus-legal', label: 'Legal & Compliance', icon: '⚖' },
       { id: 'mus-engagement', label: 'Engagement & Impact', icon: '◎' },
       { id: 'mus-gov', label: 'Stakeholder Governance', icon: '◬' },
+      { id: 'mus-security', label: 'Security', icon: '🔒' },
       { id: 'mus-chain', label: 'Chain Infrastructure', icon: '⬡' },
     ];
     return (
@@ -248,7 +260,6 @@ export default function ParadigmShift() {
         <h1 className="font-serif-dm text-[42px] italic text-[#1A1A2E] mb-4" style={{ lineHeight: 1.1 }}>Where art history meets ownership</h1>
         <p className="text-sm text-[#6B6B8A] mb-12">A blockchain platform for cultural institutions and fractional investors</p>
         <div className="grid grid-cols-2 gap-5 max-w-[560px] mx-auto">
-          {/* Investor card */}
           <div className="bg-[#FFFFFF] border border-[rgba(0,0,0,0.08)] rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:border-[rgba(124,92,252,0.2)] hover:shadow-[0_0_40px_rgba(124,92,252,0.12)] hover:-translate-y-1 text-left"
             onClick={() => { setPortal('inv'); navigate('inv-login'); }}>
             <div className="mb-4">{getArtworkSVG('rothko', 60)}</div>
@@ -256,7 +267,6 @@ export default function ParadigmShift() {
             <p className="text-[13px] text-[#6B6B8A] mb-5 leading-relaxed">Own fractions of masterpieces. Participate in governance. Build a cultural portfolio.</p>
             <span className="text-[#7C5CFC] text-sm font-semibold">Enter portal →</span>
           </div>
-          {/* Museum card */}
           <div className="bg-[#FFFFFF] border border-[rgba(0,0,0,0.08)] rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:border-[rgba(16,185,129,0.2)] hover:shadow-[0_0_40px_rgba(16,185,129,0.1)] hover:-translate-y-1 text-left"
             onClick={() => { setPortal('mus'); navigate('mus-login'); }}>
             <div className="mb-4">{getArtworkSVG('kandinsky', 60)}</div>
@@ -265,7 +275,7 @@ export default function ParadigmShift() {
             <span className="text-[#10B981] text-sm font-semibold">Enter portal →</span>
           </div>
         </div>
-        <p className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mt-16">Non-functional prototype · ParadigmShift v0.3</p>
+        <p className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mt-16">Non-functional prototype · ParadigmShift v0.4</p>
       </div>
     </div>
   );
@@ -327,7 +337,6 @@ export default function ParadigmShift() {
 
   const InvDash = () => (
     <PortalLayout breadcrumb="Investor · Dashboard">
-      {/* Welcome */}
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="font-serif-dm text-[26px] text-[#1A1A2E]">Good morning, Alex</h1>
@@ -339,7 +348,6 @@ export default function ParadigmShift() {
         </div>
       </div>
 
-      {/* KPI row */}
       <div className="grid grid-cols-4 gap-4 mb-8">
         <MetricTile label="Portfolio Value" value="$24,850" sub={<Tag variant="success">+8.4% YTD</Tag>} />
         <MetricTile label="Holdings" value="7" sub="across 4 museums" />
@@ -347,7 +355,6 @@ export default function ParadigmShift() {
         <MetricTile label="Active Votes" value="3" sub={<span className="text-[#D97706] text-xs">1 closes in 2 days</span>} />
       </div>
 
-      {/* Main grid */}
       <div className="grid grid-cols-[2fr_1fr] gap-5 mb-8">
         <Card>
           <div className="flex items-center justify-between mb-4">
@@ -382,7 +389,6 @@ export default function ParadigmShift() {
         </Card>
       </div>
 
-      {/* Recent holdings */}
       <Card hover={false}>
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-serif-dm text-lg text-[#1A1A2E]">Recent Holdings</h3>
@@ -493,7 +499,6 @@ export default function ParadigmShift() {
       <PortalLayout breadcrumb={`Investor · Holdings · ${a.title.split('(')[0].trim()}`}>
         <button className="text-sm text-[#7C5CFC] hover:underline mb-6 block" onClick={() => navigate('inv-holdings')}>← My Holdings</button>
 
-        {/* Hero */}
         <div className="flex items-start gap-6 mb-6">
           <div className="rounded-2xl overflow-hidden" style={{ boxShadow: '0 0 30px rgba(124,92,252,0.08)' }}>
             {getArtworkSVG(a.title, 80)}
@@ -512,7 +517,6 @@ export default function ParadigmShift() {
           </div>
         </div>
 
-        {/* Tabs */}
         <div className="flex gap-1 border-b border-[rgba(0,0,0,0.08)] mb-6">
           {tabs.map(t => (
             <button key={t} className={`px-4 py-3 text-sm font-medium capitalize transition-all border-b-2 ${
@@ -608,7 +612,7 @@ export default function ParadigmShift() {
     );
   };
 
-  // ─── Marketplace ─────────────────────────
+  // ─── Marketplace (Primary) ──────────────────────────
 
   const Marketplace = () => {
     const filtered = MARKET_ITEMS.filter(m => {
@@ -624,7 +628,6 @@ export default function ParadigmShift() {
           <p className="text-sm text-[#6B6B8A] mt-1">Discover fractional offerings from partner museums</p>
         </div>
 
-        {/* Featured */}
         <div className="bg-[#F0F0F5] border border-[rgba(0,0,0,0.08)] rounded-2xl p-8 mb-8 relative overflow-hidden"
           style={{ background: 'radial-gradient(ellipse at 80% 20%, rgba(124,92,252,0.06), #F0F0F5 60%)' }}>
           <div className="flex items-center justify-between">
@@ -641,7 +644,6 @@ export default function ParadigmShift() {
           </div>
         </div>
 
-        {/* Filters */}
         <div className="flex gap-2 mb-6">
           {['All', 'New', 'Hot'].map(f => (
             <button key={f} className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
@@ -650,7 +652,6 @@ export default function ParadigmShift() {
           ))}
         </div>
 
-        {/* Grid */}
         <div className="grid grid-cols-3 gap-5">
           {filtered.map(m => (
             <div key={m.id} className="bg-[#FFFFFF] border border-[rgba(0,0,0,0.08)] rounded-2xl overflow-hidden transition-all duration-300 hover:border-[rgba(124,92,252,0.2)] hover:-translate-y-1 cursor-pointer"
@@ -680,6 +681,215 @@ export default function ParadigmShift() {
       </PortalLayout>
     );
   };
+
+  // ─── Secondary Market (Masterworks-style) ──────────────
+
+  const SecondaryMarket = () => {
+    const SecondaryMiniChart = ({ data, color = '#10B981' }: { data: number[]; color?: string }) => {
+      const min = Math.min(...data);
+      const max = Math.max(...data);
+      const range = max - min || 1;
+      const w = 180;
+      const h = 50;
+      const points = data.map((v, i) => `${(i / (data.length - 1)) * w},${h - ((v - min) / range) * h}`).join(' ');
+      return (
+        <svg width={w} height={h} className="mt-2">
+          <polyline points={points} fill="none" stroke={color} strokeWidth="1.5" />
+        </svg>
+      );
+    };
+
+    return (
+      <PortalLayout breadcrumb="Investor · Secondary Market">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <h1 className="font-serif-dm text-[26px] text-[#1A1A2E]">Trending</h1>
+            <span className="text-[#9494B0] text-sm cursor-help">ⓘ</span>
+            <button className="text-[#7C5CFC] text-sm hover:underline" onClick={() => setShowTrending(!showTrending)}>
+              ({showTrending ? 'Hide' : 'Show'})
+            </button>
+          </div>
+          <Btn variant="secondary" className="flex items-center gap-2">
+            <span className="text-sm">⚙</span> SETTINGS
+          </Btn>
+        </div>
+
+        <div className="bg-[rgba(124,92,252,0.06)] border border-[rgba(124,92,252,0.1)] rounded-xl p-4 text-sm text-[#7C5CFC] mb-6">
+          SEC-compliant secondary market · Museum-first trading rules · Transfer restriction enforcement · Price stability mechanisms active
+        </div>
+
+        {showTrending && (
+          <div className="grid grid-cols-3 gap-4">
+            {SECONDARY_MARKET_ITEMS.map(item => (
+              <div key={item.id}
+                className="bg-[#1E1E2A] rounded-xl p-5 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] border border-[rgba(255,255,255,0.06)]">
+                <div className="flex items-start justify-between mb-1">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-[rgba(255,255,255,0.08)] flex items-center justify-center overflow-hidden">
+                      {getArtworkSVG(item.artist, 32)}
+                    </div>
+                    <div>
+                      <div className="text-[#F0EDE8] text-sm font-semibold">{item.artist}</div>
+                      <div className="text-[#8888A0] text-[11px]">{item.title} <span className="text-[#6B6B8A]">({item.series})</span></div>
+                    </div>
+                  </div>
+                  <div className="font-mono-dm text-[#F0EDE8] text-lg font-bold">${item.price.toFixed(2)}</div>
+                </div>
+
+                <div className="flex items-end justify-between mt-2">
+                  <SecondaryMiniChart data={item.chartData} color={item.change >= 0 ? '#10B981' : '#10B981'} />
+                  <div className="text-right space-y-0.5">
+                    {item.levels.map((lvl, i) => (
+                      <div key={i} className="font-mono-dm text-[11px] text-[#8888A0]">${lvl.toFixed(2)}</div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Trading rules info */}
+        <div className="mt-8 grid grid-cols-3 gap-4">
+          <Card>
+            <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-3 font-semibold">Trading Rules</div>
+            <div className="space-y-2">
+              {['Museum-first price stability', 'Transfer restriction checks', 'KYC/AML verification required', 'Cross-platform liquidity'].map(r => (
+                <div key={r} className="flex items-center gap-2 text-sm">
+                  <span className="text-[#059669] text-xs">✓</span>
+                  <span className="text-[#6B6B8A]">{r}</span>
+                </div>
+              ))}
+            </div>
+          </Card>
+          <Card>
+            <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-3 font-semibold">Market Stats</div>
+            <div className="space-y-3">
+              <div className="flex justify-between text-sm"><span className="text-[#6B6B8A]">24h Volume</span><span className="font-mono-dm text-[#1A1A2E]">$2.4M</span></div>
+              <div className="flex justify-between text-sm"><span className="text-[#6B6B8A]">Active Listings</span><span className="font-mono-dm text-[#1A1A2E]">1,247</span></div>
+              <div className="flex justify-between text-sm"><span className="text-[#6B6B8A]">Avg Spread</span><span className="font-mono-dm text-[#1A1A2E]">0.8%</span></div>
+              <div className="flex justify-between text-sm"><span className="text-[#6B6B8A]">Settlement</span><span className="font-mono-dm text-[#1A1A2E]">T+1</span></div>
+            </div>
+          </Card>
+          <Card>
+            <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-3 font-semibold">Impact Metrics</div>
+            <div className="space-y-3">
+              <div className="flex justify-between text-sm"><span className="text-[#6B6B8A]">Cultural Impact</span><span className="font-mono-dm text-[#10B981]">94/100</span></div>
+              <div className="flex justify-between text-sm"><span className="text-[#6B6B8A]">Public Access</span><span className="font-mono-dm text-[#059669]">Guaranteed</span></div>
+              <div className="flex justify-between text-sm"><span className="text-[#6B6B8A]">Museum Benefit</span><span className="font-mono-dm text-[#1A1A2E]">$1.2M YTD</span></div>
+              <div className="flex justify-between text-sm"><span className="text-[#6B6B8A]">Donor-Investor</span><span className="font-mono-dm text-[#1A1A2E]">324 hybrid</span></div>
+            </div>
+          </Card>
+        </div>
+      </PortalLayout>
+    );
+  };
+
+  // ─── Investor Analytics ──────────────────
+
+  const InvAnalytics = () => (
+    <PortalLayout breadcrumb="Investor · Analytics">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="font-serif-dm text-[26px] text-[#1A1A2E]">Analytics</h1>
+          <p className="text-sm text-[#6B6B8A] mt-1">Data architecture · Provenance · Cultural value metrics</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-4 gap-4 mb-8">
+        <MetricTile label="Provenance Records" value="93" sub="100% on-chain verified" />
+        <MetricTile label="Cultural Impact" value="94/100" sub={<Tag variant="success">+8 pts YTD</Tag>} />
+        <MetricTile label="Market Performance" value="+12.4%" sub="portfolio IRR" />
+        <MetricTile label="Governance Score" value="87/100" sub="participation rate" />
+      </div>
+
+      <div className="grid grid-cols-[2fr_1fr] gap-6 mb-8">
+        {/* Provenance Database */}
+        <Card hover={false}>
+          <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Immutable Provenance Database</h3>
+          <div className="bg-[rgba(124,92,252,0.06)] border border-[rgba(124,92,252,0.08)] rounded-lg p-3 text-xs text-[#7C5CFC] mb-4">
+            On-chain/off-chain hybrid storage · Tamper-proof · Privacy-preserving architecture
+          </div>
+          <table className="w-full">
+            <thead>
+              <tr className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] border-b border-[rgba(0,0,0,0.08)]">
+                {['Artwork', 'Events', 'Last Verified', 'Chain', 'Integrity'].map(h => (
+                  <th key={h} className={`pb-3 font-semibold ${h === 'Artwork' ? 'text-left' : 'text-right'}`}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {PROVENANCE_RECORDS.map(r => (
+                <tr key={r.artwork} className="border-b border-[rgba(0,0,0,0.04)] hover:bg-[#F0F0F5] transition-colors">
+                  <td className="py-3 text-sm text-[#1A1A2E]">{r.artwork}</td>
+                  <td className="text-right font-mono-dm text-sm text-[#6B6B8A]">{r.events}</td>
+                  <td className="text-right text-sm text-[#6B6B8A]">{r.lastVerified}</td>
+                  <td className="text-right"><Tag variant="inv">{r.chain}</Tag></td>
+                  <td className="text-right"><Tag variant="success">{r.integrity}</Tag></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Card>
+
+        {/* Cultural Value Metrics */}
+        <div className="space-y-4">
+          <Card>
+            <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-4 font-semibold">Cultural Value Metrics</div>
+            <div className="space-y-3">
+              {CULTURAL_METRICS.map(m => (
+                <div key={m.metric} className="bg-[#F0F0F5] rounded-lg p-3 border border-[rgba(0,0,0,0.04)]">
+                  <div className="text-[10px] text-[#9494B0]">{m.metric}</div>
+                  <div className="flex items-center justify-between">
+                    <div className="font-serif-dm text-xl text-[#1A1A2E]">{m.value}</div>
+                    <Tag variant="success">+{m.trend}</Tag>
+                  </div>
+                  <div className="text-[10px] text-[#9494B0]">{m.period}</div>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </div>
+      </div>
+
+      {/* Market Performance + Governance Analytics */}
+      <div className="grid grid-cols-2 gap-6">
+        <Card>
+          <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Market Performance</h3>
+          <MiniChart data={PORT_CHART} color="#7C5CFC" height={100} />
+          <div className="grid grid-cols-3 gap-4 mt-4">
+            {[['Total Return', '+24.1%'], ['Sharpe Ratio', '1.42'], ['Max Drawdown', '-3.7%']].map(([l, v]) => (
+              <div key={l}>
+                <div className="text-[10px] text-[#9494B0]">{l}</div>
+                <div className="font-mono-dm text-sm text-[#1A1A2E]">{v}</div>
+              </div>
+            ))}
+          </div>
+        </Card>
+        <Card>
+          <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Governance Analytics</h3>
+          <div className="space-y-3">
+            {[
+              { label: 'Proposals Voted', value: '18/24', pct: 75 },
+              { label: 'Alignment with Outcome', value: '89%', pct: 89 },
+              { label: 'Avg Response Time', value: '2.3 days', pct: 60 },
+              { label: 'PSG Utilization', value: '78%', pct: 78 },
+            ].map(g => (
+              <div key={g.label}>
+                <div className="flex justify-between text-sm mb-1">
+                  <span className="text-[#6B6B8A]">{g.label}</span>
+                  <span className="font-mono-dm text-[#1A1A2E]">{g.value}</span>
+                </div>
+                <div className="w-full h-1.5 rounded bg-[rgba(0,0,0,0.06)]">
+                  <div className="h-full bg-[#7C5CFC] rounded transition-all" style={{ width: `${g.pct}%` }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </div>
+    </PortalLayout>
+  );
 
   // ─── Marketplace Detail ──────────────────
 
@@ -736,7 +946,6 @@ export default function ParadigmShift() {
             </Card>
           </div>
 
-          {/* Purchase card */}
           <div className="sticky top-8">
             <Card>
               <h3 className="font-serif-dm text-[22px] text-[#1A1A2E] mb-1">Buy shares</h3>
@@ -1059,7 +1268,6 @@ export default function ParadigmShift() {
     </PortalLayout>
   );
 
-  // Museum proposal mini card (shared between dash and gov)
   const MusProposalMini = ({ proposal: p }: { proposal: typeof musProposals[0] }) => {
     const handleDecision = (d: string) => {
       setMusProposals(prev => prev.map(pr => pr.id === p.id ? { ...pr, decision: d } : pr));
@@ -1179,7 +1387,6 @@ export default function ParadigmShift() {
           </Card>
         </div>
 
-        {/* Mission Alignment */}
         <Card hover={false}>
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-serif-dm text-lg text-[#1A1A2E]">Mission Alignment Scores</h3>
@@ -1255,6 +1462,293 @@ export default function ParadigmShift() {
     </PortalLayout>
   );
 
+  // ─── Museum Legal & Compliance ──────────────
+
+  const MusLegal = () => (
+    <PortalLayout breadcrumb="Museum · Legal & Compliance">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="font-serif-dm text-[26px] text-[#1A1A2E]">Legal & Compliance</h1>
+          <p className="text-sm text-[#6B6B8A] mt-1">SPV structure · Donor protections · Regulatory reporting</p>
+        </div>
+        <Tag variant="mus">501(c)(3) Compliant</Tag>
+      </div>
+
+      <div className="bg-[rgba(16,185,129,0.06)] border border-[rgba(16,185,129,0.1)] rounded-xl p-4 text-sm text-[#10B981] mb-6">
+        Museum-controlled SPV isolates fractionalization from core operations · AAMD/AAM/ICOM guidelines embedded · Automated regulatory reporting
+      </div>
+
+      {/* SPV Details */}
+      <div className="grid grid-cols-[2fr_1fr] gap-6 mb-8">
+        <Card>
+          <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Museum-Controlled SPV</h3>
+          <div className="grid grid-cols-2 gap-4">
+            {Object.entries(SPV_DETAILS).map(([k, v]) => (
+              <div key={k}>
+                <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-1">{k.replace(/([A-Z])/g, ' $1').trim()}</div>
+                <div className="text-sm text-[#1A1A2E] font-medium">{v}</div>
+              </div>
+            ))}
+          </div>
+          <div className="bg-[rgba(16,185,129,0.06)] rounded-lg p-3 mt-4 text-xs text-[#10B981]">
+            SPV provides legal isolation · Museum retains ≥51% ownership at all times · Delaware jurisdiction for maximum legal flexibility
+          </div>
+        </Card>
+
+        <div className="space-y-4">
+          {LEGAL_PROTECTIONS.map(lp => (
+            <div key={lp.title} className="bg-[#F0F0F5] border border-[rgba(0,0,0,0.04)] rounded-xl p-4">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-base">{lp.icon}</span>
+                <span className="text-sm text-[#1A1A2E] font-medium">{lp.title}</span>
+              </div>
+              <p className="text-[11px] text-[#6B6B8A]">{lp.desc}</p>
+              <Tag variant="success" >{lp.status}</Tag>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Regulatory Reporting */}
+      <Card hover={false} className="mb-8">
+        <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Regulatory Reporting</h3>
+        <table className="w-full">
+          <thead>
+            <tr className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] border-b border-[rgba(0,0,0,0.08)]">
+              {['Entity', 'Report Type', 'Last Filed', 'Status', 'Next Due'].map(h => (
+                <th key={h} className={`pb-3 font-semibold ${h === 'Entity' || h === 'Report Type' ? 'text-left' : 'text-right'}`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {REGULATORY_REPORTS.map(r => (
+              <tr key={r.entity} className="border-b border-[rgba(0,0,0,0.04)] hover:bg-[#F0F0F5] transition-colors">
+                <td className="py-3 text-sm font-medium text-[#1A1A2E]">{r.entity}</td>
+                <td className="py-3 text-sm text-[#6B6B8A]">{r.type}</td>
+                <td className="text-right text-sm text-[#6B6B8A]">{r.lastFiled}</td>
+                <td className="text-right"><Tag variant="success">{r.status}</Tag></td>
+                <td className="text-right text-sm text-[#6B6B8A]">{r.next}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Card>
+
+      {/* Donor Intent Records */}
+      <Card hover={false}>
+        <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Donor Intent Safeguards</h3>
+        <table className="w-full">
+          <thead>
+            <tr className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] border-b border-[rgba(0,0,0,0.08)]">
+              {['Donor', 'Artwork', 'Restriction', 'Status', 'Year'].map(h => (
+                <th key={h} className={`pb-3 font-semibold ${['Donor', 'Artwork', 'Restriction'].includes(h) ? 'text-left' : 'text-right'}`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {DONOR_RECORDS.map(d => (
+              <tr key={d.donor} className="border-b border-[rgba(0,0,0,0.04)] hover:bg-[#F0F0F5] transition-colors">
+                <td className="py-3 text-sm font-medium text-[#1A1A2E]">{d.donor}</td>
+                <td className="py-3 text-sm text-[#6B6B8A]">{d.artwork}</td>
+                <td className="py-3 text-sm text-[#6B6B8A] max-w-[240px]">{d.restriction}</td>
+                <td className="text-right"><Tag variant="success">{d.status}</Tag></td>
+                <td className="text-right text-sm text-[#9494B0]">{d.year}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Card>
+    </PortalLayout>
+  );
+
+  // ─── Museum Management ──────────────────
+
+  const MusManagement = () => (
+    <PortalLayout breadcrumb="Museum · Management">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="font-serif-dm text-[26px] text-[#1A1A2E]">Museum Management</h1>
+          <p className="text-sm text-[#6B6B8A] mt-1">Approval workflows · Staff RBAC · Integrations · Donor management</p>
+        </div>
+        <Btn portal="mus">+ New Workflow</Btn>
+      </div>
+
+      {/* Approval Workflows */}
+      <Card hover={false} className="mb-8">
+        <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Institutional Approval Workflows</h3>
+        <div className="space-y-4">
+          {APPROVAL_WORKFLOWS.map(w => (
+            <div key={w.id} className="bg-[#F0F0F5] border border-[rgba(0,0,0,0.04)] rounded-xl p-5">
+              <div className="flex items-center justify-between mb-3">
+                <div>
+                  <div className="text-sm text-[#1A1A2E] font-medium">{w.title}</div>
+                  <div className="text-[11px] text-[#9494B0]">Initiated by {w.initiator} · {w.date}</div>
+                </div>
+                <Tag variant="mus">{w.stage}</Tag>
+              </div>
+              <div className="flex items-center gap-1">
+                {w.stages.map((s, i) => (
+                  <React.Fragment key={s}>
+                    <div className={`flex-1 h-2 rounded-full transition-all ${i <= w.currentStage ? 'bg-[#10B981]' : 'bg-[rgba(0,0,0,0.08)]'}`} />
+                    {i < w.stages.length - 1 && <div className="w-1" />}
+                  </React.Fragment>
+                ))}
+              </div>
+              <div className="flex justify-between mt-2">
+                {w.stages.map((s, i) => (
+                  <span key={s} className={`text-[9px] ${i <= w.currentStage ? 'text-[#10B981]' : 'text-[#9494B0]'}`}>{s}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
+
+      <div className="grid grid-cols-2 gap-6 mb-8">
+        {/* Role-Based Access Control */}
+        <Card hover={false}>
+          <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Role-Based Access Control</h3>
+          <div className="space-y-3">
+            {STAFF_ROLES.map(s => (
+              <div key={s.name} className="bg-[#F0F0F5] border border-[rgba(0,0,0,0.04)] rounded-lg p-3">
+                <div className="flex items-center justify-between mb-1">
+                  <div className="text-sm text-[#1A1A2E] font-medium">{s.name}</div>
+                  <Tag variant="mus">{s.role}</Tag>
+                </div>
+                <div className="flex gap-1.5 flex-wrap mt-1">
+                  {s.permissions.map(p => (
+                    <span key={p} className="text-[9px] bg-[rgba(16,185,129,0.08)] text-[#10B981] px-2 py-0.5 rounded-full">{p}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        {/* System Integrations */}
+        <Card hover={false}>
+          <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">System Integrations</h3>
+          <div className="space-y-2">
+            {SYSTEM_INTEGRATIONS.map(si => (
+              <div key={si.system} className="flex items-center justify-between bg-[#F0F0F5] border border-[rgba(0,0,0,0.04)] rounded-lg p-3">
+                <div>
+                  <div className="text-sm text-[#1A1A2E] font-medium">{si.system}</div>
+                  <div className="text-[10px] text-[#9494B0]">{si.type}</div>
+                </div>
+                <div className="text-right">
+                  <Tag variant="success">{si.status}</Tag>
+                  <div className="text-[9px] text-[#9494B0] mt-1">Synced {si.lastSync}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </div>
+
+      {/* Public Access Guarantees */}
+      <Card>
+        <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Public Access Guarantees</h3>
+        <div className="grid grid-cols-3 gap-4">
+          {[
+            { title: 'Display Requirement', desc: 'All tokenized works must be on public display ≥6 months/year', status: 'Enforced' },
+            { title: 'Digital Access', desc: 'High-resolution digital reproductions available via museum website', status: 'Active' },
+            { title: 'Educational Programs', desc: 'Tokenization revenue funds 38 active education programs', status: 'Active' },
+          ].map(g => (
+            <div key={g.title} className="bg-[#F0F0F5] border border-[rgba(0,0,0,0.04)] rounded-xl p-4">
+              <div className="text-sm text-[#1A1A2E] font-medium mb-1">{g.title}</div>
+              <p className="text-[11px] text-[#6B6B8A] mb-2">{g.desc}</p>
+              <Tag variant="success">{g.status}</Tag>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </PortalLayout>
+  );
+
+  // ─── Museum Security ──────────────────
+
+  const MusSecurity = () => (
+    <PortalLayout breadcrumb="Museum · Security">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="font-serif-dm text-[26px] text-[#1A1A2E]">Security Architecture</h1>
+          <p className="text-sm text-[#6B6B8A] mt-1">Multi-layered security · Artwork protection · Institutional key management</p>
+        </div>
+        <Tag variant="success">All systems operational</Tag>
+      </div>
+
+      <div className="bg-[rgba(16,185,129,0.06)] border border-[rgba(16,185,129,0.1)] rounded-xl p-4 text-sm text-[#10B981] mb-6">
+        Museum-specific security priorities · HSM-protected keys · Multi-sig governance · Continuous compliance monitoring
+      </div>
+
+      <div className="grid grid-cols-4 gap-4 mb-8">
+        <MetricTile label="Security Score" value="98/100" sub={<Tag variant="success">Excellent</Tag>} />
+        <MetricTile label="Active Controls" value="8" sub="all operational" />
+        <MetricTile label="Threat Level" value="Low" sub="no active threats" />
+        <MetricTile label="Last Audit" value="Apr 1" sub="PwC · Passed" />
+      </div>
+
+      <div className="grid grid-cols-2 gap-6 mb-8">
+        <Card hover={false}>
+          <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Security Controls</h3>
+          <div className="space-y-2">
+            {SECURITY_CONTROLS.map(sc => (
+              <div key={sc.control} className="flex items-start justify-between bg-[#F0F0F5] border border-[rgba(0,0,0,0.04)] rounded-lg p-3">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <div className="text-sm text-[#1A1A2E] font-medium">{sc.control}</div>
+                    <Tag variant={sc.level === 'Critical' ? 'danger' : sc.level === 'High' ? 'warning' : 'muted'}>{sc.level}</Tag>
+                  </div>
+                  <div className="text-[11px] text-[#6B6B8A] mt-0.5">{sc.desc}</div>
+                </div>
+                <Tag variant="success">{sc.status}</Tag>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        <div className="space-y-4">
+          <Card>
+            <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Multi-Signature Governance</h3>
+            <div className="bg-[#F0F0F5] rounded-xl p-4 border border-[rgba(0,0,0,0.04)] mb-4">
+              <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-2">Signing Policy</div>
+              <div className="font-serif-dm text-2xl text-[#1A1A2E]">3 of 5</div>
+              <p className="text-[11px] text-[#6B6B8A] mt-1">signatures required for high-value decisions</p>
+            </div>
+            <div className="space-y-2">
+              {['Director (HSM)', 'Board Chair (HSM)', 'Chief Curator (Software)', 'Legal Counsel (Software)', 'CFO (Software)'].map((signer, i) => (
+                <div key={signer} className="flex items-center justify-between text-sm">
+                  <span className="text-[#6B6B8A]">{signer}</span>
+                  <Tag variant={i < 3 ? 'success' : 'muted'}>{i < 3 ? 'Active' : 'Standby'}</Tag>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          <Card>
+            <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Recent Security Events</h3>
+            <div className="space-y-3">
+              {[
+                { event: 'HSM key rotation completed', time: '2h ago', severity: 'Info' },
+                { event: 'Compliance scan passed', time: '6h ago', severity: 'Info' },
+                { event: 'Failed login attempt blocked', time: '1d ago', severity: 'Warning' },
+                { event: 'Insurance policy renewed (AXA XL)', time: '3d ago', severity: 'Info' },
+              ].map((e, i) => (
+                <div key={i} className="flex items-center justify-between text-sm bg-[#F0F0F5] rounded-lg p-3 border border-[rgba(0,0,0,0.04)]">
+                  <div>
+                    <div className="text-[#1A1A2E]">{e.event}</div>
+                    <div className="text-[10px] text-[#9494B0]">{e.time}</div>
+                  </div>
+                  <Tag variant={e.severity === 'Warning' ? 'warning' : 'muted'}>{e.severity}</Tag>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </div>
+      </div>
+    </PortalLayout>
+  );
+
   // ─── Blockchain Infrastructure (Investor) ──
   const InvChain = () => {
     const [selectedChain, setSelectedChain] = useState('solana');
@@ -1292,7 +1786,6 @@ export default function ParadigmShift() {
           Transactions are automatically routed to the optimal blockchain based on cost, speed, privacy, and compliance requirements.
         </div>
 
-        {/* Chain selector cards */}
         <div className="grid grid-cols-3 gap-4 mb-8">
           {chains.map(c => (
             <div key={c.id}
@@ -1315,7 +1808,6 @@ export default function ParadigmShift() {
         </div>
 
         <div className="grid grid-cols-[2fr_1fr] gap-6 mb-8">
-          {/* Chain detail */}
           <Card>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-4 h-4 rounded-full" style={{ background: active.color }} />
@@ -1349,7 +1841,6 @@ export default function ParadigmShift() {
             </div>
           </Card>
 
-          {/* Optimization engine */}
           <div className="space-y-4">
             <Card>
               <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-4 font-semibold">Optimization Engine</div>
@@ -1371,7 +1862,6 @@ export default function ParadigmShift() {
           </div>
         </div>
 
-        {/* Transaction routing table */}
         <Card hover={false} className="mb-8">
           <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Dynamic Chain Routing</h3>
           <table className="w-full">
@@ -1395,7 +1885,6 @@ export default function ParadigmShift() {
           </table>
         </Card>
 
-        {/* Recent transactions */}
         <Card hover={false}>
           <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Recent On-Chain Activity</h3>
           <table className="w-full">
@@ -1461,7 +1950,6 @@ export default function ParadigmShift() {
           MoMA operates a dedicated Avalanche Subnet for private governance. Public trading runs on Solana. Ethereum provides settlement finality and cross-chain liquidity.
         </div>
 
-        {/* KPI row */}
         <div className="grid grid-cols-4 gap-4 mb-8">
           <MetricTile label="Active Chains" value="3" sub="Avalanche · Solana · Ethereum" />
           <MetricTile label="Smart Contracts" value="9" sub="across 3 chains" />
@@ -1469,7 +1957,6 @@ export default function ParadigmShift() {
           <MetricTile label="On-Chain Decisions" value="24" sub="all published & auditable" />
         </div>
 
-        {/* Chain tabs */}
         <div className="flex gap-2 mb-6">
           {chains.map(c => (
             <button key={c.id}
@@ -1484,13 +1971,10 @@ export default function ParadigmShift() {
 
         <div className="grid grid-cols-[2fr_1fr] gap-6 mb-8">
           <div className="space-y-6">
-            {/* Architecture diagram card */}
             <Card>
               <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Hybrid Architecture</h3>
-              {/* Visual architecture */}
               <div className="relative bg-[#F0F0F5] rounded-xl p-6 border border-[rgba(0,0,0,0.04)]">
                 <div className="grid grid-cols-3 gap-4">
-                  {/* Private layer */}
                   <div className="col-span-1 bg-[#FFFFFF] rounded-xl p-4 border-2 border-[#E84142] border-opacity-30">
                     <div className="text-[10px] uppercase tracking-[0.08em] text-[#E84142] font-semibold mb-2">Private Layer</div>
                     <div className="font-serif-dm text-sm text-[#1A1A2E] mb-2">Avalanche Subnet</div>
@@ -1502,7 +1986,6 @@ export default function ParadigmShift() {
                       ))}
                     </div>
                   </div>
-                  {/* Bridge */}
                   <div className="col-span-1 flex flex-col items-center justify-center">
                     <div className="text-[10px] uppercase tracking-[0.08em] text-[#9494B0] mb-2">Cross-Chain Bridge</div>
                     <div className="w-full flex items-center gap-1">
@@ -1520,7 +2003,6 @@ export default function ParadigmShift() {
                       <div className="text-[9px] text-[#9494B0]">Auto-selects optimal chain</div>
                     </div>
                   </div>
-                  {/* Public layer */}
                   <div className="col-span-1 space-y-3">
                     <div className="bg-[#FFFFFF] rounded-xl p-4 border-2 border-[#9945FF] border-opacity-30">
                       <div className="text-[10px] uppercase tracking-[0.08em] text-[#9945FF] font-semibold mb-1">Public Trading</div>
@@ -1537,7 +2019,6 @@ export default function ParadigmShift() {
               </div>
             </Card>
 
-            {/* Contract operations */}
             <Card hover={false}>
               <h3 className="font-serif-dm text-lg text-[#1A1A2E] mb-4">Recent Contract Operations</h3>
               <table className="w-full">
@@ -1563,7 +2044,6 @@ export default function ParadigmShift() {
             </Card>
           </div>
 
-          {/* Right sidebar */}
           <div className="space-y-4">
             <Card>
               <div className="text-[11px] uppercase tracking-[0.08em] text-[#9494B0] mb-4 font-semibold">MoMA Subnet Config</div>
@@ -1785,12 +2265,17 @@ export default function ParadigmShift() {
       case 'artwork-detail': return <ArtworkDetail />;
       case 'marketplace': return <Marketplace />;
       case 'mkt-detail': return <MktDetail />;
+      case 'inv-secondary': return <SecondaryMarket />;
+      case 'inv-analytics': return <InvAnalytics />;
       case 'inv-gov': return <InvGov />;
       case 'token-market': return <TokenMarket />;
       case 'inv-chain': return <InvChain />;
       case 'mus-dash': return <MusDash />;
+      case 'mus-management': return <MusManagement />;
+      case 'mus-legal': return <MusLegal />;
       case 'mus-engagement': return <MusEngagement />;
       case 'mus-gov': return <MusGov />;
+      case 'mus-security': return <MusSecurity />;
       case 'mus-chain': return <MusChain />;
       default: return <RoleSelect />;
     }

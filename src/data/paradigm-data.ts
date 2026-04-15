@@ -61,3 +61,100 @@ export const BANKSY_PAIRS = [
 export const COMPLIANCE_ITEMS = [
   "SEC", "ESMA", "MiFID II", "GDPR", "IRS 501(c)(3)", "AMLD", "EU Cultural Heritage"
 ];
+
+// ─── Secondary Market Data (Masterworks-style) ───
+export const SECONDARY_MARKET_ITEMS = [
+  { id: 's1', artist: "Barkley L. Hendricks", title: "Selina/Star", series: "Masterworks 02...", price: 35.29, chartData: [36.53, 36.20, 35.91, 35.80, 35.50, 35.29], levels: [36.53, 35.91, 35.29], change: -3.4 },
+  { id: 's2', artist: "Banksy", title: "Monkey Poison", series: "Masterwork...", price: 32.45, chartData: [33.00, 32.80, 28.70, 27.50, 30.20, 32.45], levels: [33.00, 28.70, 24.41], change: -1.7 },
+  { id: 's3', artist: "Cecily Brown", title: "Girl Trouble", series: "Masterworks 00...", price: 28.52, chartData: [30.71, 30.20, 29.61, 29.80, 29.10, 28.52], levels: [30.71, 29.61, 28.52], change: -7.1 },
+  { id: 's4', artist: "Cecily Brown", title: "There is a Land of Pure D...", series: "Masterworks", price: 25.69, chartData: [27.49, 27.00, 26.55, 26.30, 25.90, 25.69], levels: [27.49, 26.55, 25.61], change: -6.5 },
+  { id: 's5', artist: "Yayoi Kusama", title: "Infinity Nets T.I.T.", series: "Masterwo...", price: 24.40, chartData: [27.76, 27.00, 26.08, 25.50, 24.80, 24.40], levels: [27.76, 26.08, 24.40], change: -12.1 },
+  { id: 's6', artist: "George Condo", title: "Mary Magdalene", series: "Masterwo...", price: 23.94, chartData: [34.17, 32.00, 29.05, 27.00, 25.00, 23.94], levels: [34.17, 29.05, 23.94], change: -29.9 },
+  { id: 's7', artist: "David Hockney", title: "Iris with Evian Bottle", series: "Mast...", price: 23.64, chartData: [24.15, 23.80, 23.50, 23.00, 22.50, 23.64], levels: [24.15, 23.00, 21.85], change: -2.1 },
+  { id: 's8', artist: "Joan Mitchell", title: "Untitled (Buissonnière)", series: "M...", price: 22.70, chartData: [23.10, 22.00, 19.95, 18.50, 19.00, 22.70], levels: [23.10, 19.95, 16.80], change: -1.7 },
+  { id: 's9', artist: "Pierre Soulages", title: "Peinture 181 × 91 cm, 7 av...", series: "M...", price: 22.50, chartData: [33.50, 30.00, 27.00, 25.00, 23.00, 22.50], levels: [33.50, 22.50, 22.50], change: -32.8 },
+];
+
+// ─── Legal & Compliance Data ───
+export const SPV_DETAILS = {
+  name: "ParadigmShift Museum Trust SPV I, LLC",
+  type: "501(c)(3) Special Purpose Vehicle",
+  controlledBy: "Museum of Modern Art",
+  jurisdiction: "Delaware, USA",
+  established: "2024-01-15",
+  status: "Active",
+};
+
+export const LEGAL_PROTECTIONS = [
+  { title: "Perpetual Museum Control", desc: "Legal structures ensuring permanent museum majority ownership (≥51%)", status: "Active", icon: "🏛" },
+  { title: "Donor Intent Safeguards", desc: "Systems to respect and record historical donor restrictions", status: "Active", icon: "📜" },
+  { title: "Reversion Clauses", desc: "Automatic return of full ownership under specific conditions", status: "Active", icon: "↩" },
+  { title: "Ethics Framework", desc: "Embedded guidelines from AAMD, AAM, and ICOM", status: "Active", icon: "⚖" },
+];
+
+export const REGULATORY_REPORTS = [
+  { entity: "SEC", type: "Securities Compliance", lastFiled: "Mar 2026", status: "Current", next: "Jun 2026" },
+  { entity: "IRS", type: "501(c)(3) Annual Report", lastFiled: "Jan 2026", status: "Current", next: "Jan 2027" },
+  { entity: "NY AG", type: "Charitable Org Report", lastFiled: "Feb 2026", status: "Current", next: "Feb 2027" },
+  { entity: "ESMA", type: "MiFID II Compliance", lastFiled: "Mar 2026", status: "Current", next: "Sep 2026" },
+  { entity: "GDPR DPA", type: "Data Protection Audit", lastFiled: "Jan 2026", status: "Current", next: "Jan 2027" },
+];
+
+// ─── Museum Management Data ───
+export const APPROVAL_WORKFLOWS = [
+  { id: 'w1', title: "Deaccession: Warhol Campbell's Soup", stage: "Board Review", stages: ["Curator Review", "Committee Vote", "Board Review", "Legal Clearance", "Public Notice"], currentStage: 2, initiator: "Dr. Martinez", date: "Apr 10, 2026" },
+  { id: 'w2', title: "Tokenization: Monet Water Lilies", stage: "Legal Clearance", stages: ["Curator Review", "Committee Vote", "Board Review", "Legal Clearance", "Public Notice"], currentStage: 3, initiator: "Sarah Chen", date: "Apr 8, 2026" },
+  { id: 'w3', title: "Loan Extension: Rothko to Tate", stage: "Committee Vote", stages: ["Curator Review", "Committee Vote", "Board Review"], currentStage: 1, initiator: "Dr. Martinez", date: "Apr 12, 2026" },
+];
+
+export const STAFF_ROLES = [
+  { name: "Dr. Elena Martinez", role: "Director", permissions: ["Full Access", "Override Authority", "Financial Approval"], status: "Active" },
+  { name: "Sarah Chen", role: "Chief Curator", permissions: ["Collection Management", "Loan Approval", "Exhibition Planning"], status: "Active" },
+  { name: "James Liu", role: "Board Chair", permissions: ["Governance Voting", "Financial Review", "Policy Override"], status: "Active" },
+  { name: "Maria Santos", role: "Registrar", permissions: ["Artwork Records", "Condition Reports", "Provenance Data"], status: "Active" },
+  { name: "David Kim", role: "Development Officer", permissions: ["Donor Relations", "Revenue Reports", "Investor Comms"], status: "Active" },
+];
+
+export const DONOR_RECORDS = [
+  { donor: "The Rothko Estate", artwork: "Rothko No. 61", restriction: "Must remain on public display ≥6 months/year", status: "Compliant", year: 1987 },
+  { donor: "Anonymous Benefactor", artwork: "Picasso Demoiselles", restriction: "No commercial reproduction without written consent", status: "Compliant", year: 1972 },
+  { donor: "Kandinsky Society", artwork: "Kandinsky Comp. 8", restriction: "Proceeds must fund education programs", status: "Compliant", year: 1995 },
+];
+
+export const SYSTEM_INTEGRATIONS = [
+  { system: "The Museum System (TMS)", type: "Collection Management", status: "Connected", lastSync: "2m ago" },
+  { system: "Raiser's Edge NXT", type: "Donor Management / CRM", status: "Connected", lastSync: "15m ago" },
+  { system: "Workday", type: "Financial Management", status: "Connected", lastSync: "1h ago" },
+  { system: "Artnet Price Database", type: "Market Valuation", status: "Connected", lastSync: "30m ago" },
+  { system: "MutualArt", type: "Art Market Analytics", status: "Connected", lastSync: "45m ago" },
+  { system: "Europeana", type: "EU Cultural Heritage", status: "Connected", lastSync: "2h ago" },
+];
+
+// ─── Analytics Data ───
+export const PROVENANCE_RECORDS = [
+  { artwork: "Rothko No. 61", events: 14, lastVerified: "Apr 14, 2026", chain: "Avalanche", integrity: "100%" },
+  { artwork: "Picasso Demoiselles", events: 22, lastVerified: "Apr 13, 2026", chain: "Avalanche", integrity: "100%" },
+  { artwork: "de Kooning Excavation", events: 9, lastVerified: "Apr 14, 2026", chain: "Avalanche", integrity: "100%" },
+  { artwork: "Van Gogh Starry Night", events: 31, lastVerified: "Apr 12, 2026", chain: "Avalanche", integrity: "100%" },
+  { artwork: "Kandinsky Comp. 8", events: 17, lastVerified: "Apr 14, 2026", chain: "Avalanche", integrity: "100%" },
+];
+
+export const CULTURAL_METRICS = [
+  { metric: "Public Engagement Score", value: "94/100", trend: "+8", period: "vs last quarter" },
+  { metric: "Educational Programs Funded", value: "38", trend: "+12", period: "this year" },
+  { metric: "Community Benefit Index", value: "8.7/10", trend: "+0.4", period: "vs last quarter" },
+  { metric: "Audience Diversity Score", value: "82/100", trend: "+5", period: "vs last year" },
+  { metric: "Mission Alignment", value: "96%", trend: "+2%", period: "vs last quarter" },
+];
+
+// ─── Security Data ───
+export const SECURITY_CONTROLS = [
+  { control: "Hardware Security Modules", desc: "HSM-protected institutional keys for critical museum controls", status: "Active", level: "Critical" },
+  { control: "Multi-Signature Governance", desc: "3-of-5 signatures required for high-value decisions", status: "Active", level: "Critical" },
+  { control: "Regulatory Compliance Monitor", desc: "Automated checks for legal adherence across jurisdictions", status: "Active", level: "High" },
+  { control: "Threat Intelligence", desc: "Museum-specific security threat monitoring & alerting", status: "Active", level: "High" },
+  { control: "Digital Twin Security", desc: "Protected digital representations of physical artworks", status: "Active", level: "Medium" },
+  { control: "Provenance Protection", desc: "Immutable audit trail preventing unauthorized history changes", status: "Active", level: "Critical" },
+  { control: "Insurance Integration", desc: "Connected to museum insurance framework (AXA XL)", status: "Active", level: "Medium" },
+  { control: "Conservation Record Security", desc: "Encrypted condition and conservation data", status: "Active", level: "High" },
+];
